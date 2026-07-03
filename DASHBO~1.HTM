@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13F Search — Carteiras dos grandes gestores</title>
+<style>
+:root{--bg:#f5f7fa;--panel:#ffffff;--panel2:#eef1f6;--txt:#1c2433;--mut:#66708a;
+--grn:#1e8e4d;--red:#c0392b;--amb:#b8860b;--acc:#1f6fd6;--bord:#dde3ee}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt)}
+header{padding:18px 24px 10px}
+h1{margin:0;font-size:20px}h1 small{color:var(--mut);font-weight:400;font-size:13px;margin-left:10px}
+nav{display:flex;gap:6px;padding:10px 24px;border-bottom:1px solid var(--bord);flex-wrap:wrap}
+nav button{background:var(--panel);color:var(--txt);border:1px solid var(--bord);border-radius:8px;
+padding:8px 14px;cursor:pointer;font-size:13px}
+nav button.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+main{padding:18px 24px;max-width:1500px}
+.controls{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+select,input[type=text]{background:var(--panel);color:var(--txt);border:1px solid var(--bord);
+border-radius:8px;padding:8px 10px;font-size:13px;min-width:180px}
+table{border-collapse:collapse;width:100%;background:var(--panel);border-radius:10px;overflow:hidden;
+box-shadow:0 1px 3px rgba(20,30,60,.08)}
+th{background:var(--panel2);text-align:left;padding:9px 10px;font-size:12px;color:var(--mut);
+text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}
+td{padding:8px 10px;border-top:1px solid var(--bord);vertical-align:top}
+tr:hover td{background:#f0f4fb}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;background:#eef1f6;border:1px solid var(--bord);border-radius:20px;
+padding:1px 8px;margin:1px 2px;font-size:11.5px;white-space:nowrap}
+.chip.g{background:#e3f5ea;border-color:#b7e0c6;color:#186a3b}
+.chip.r{background:#fdeaea;border-color:#f0c0c0;color:#a02020}
+.chip.gi{background:#eef8f1;color:#2d7d4f}.chip.ri{background:#faeeee;color:#a54848}
+.badge{display:inline-block;border-radius:6px;padding:1px 7px;font-weight:700;font-size:12px}
+.badge.pos{background:#e3f5ea;color:#186a3b}.badge.neg{background:#fdeaea;color:#a02020}
+.badge.zero{background:var(--panel2);color:var(--mut)}
+.pc{font-size:10.5px;font-weight:700;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px}
+.pc.put{background:#fdeaea;color:#a02020}.pc.call{background:#e3f5ea;color:#186a3b}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--bord);border-radius:10px;padding:12px 14px;
+box-shadow:0 1px 3px rgba(20,30,60,.08)}
+.card h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.card h3.g{color:var(--grn)}.card h3.r{color:var(--red)}.card h3.gi{color:#2d7d4f}.card h3.ri{color:#a54848}
+.card ul{list-style:none;margin:0;padding:0}
+.card li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px solid var(--bord);font-size:13px}
+.card li:first-child{border-top:0}
+.mut{color:var(--mut)}.sm{font-size:12px}
+a{color:var(--acc)}
+.hm td{padding:4px 6px;font-size:12px}
+.hm .cell{border-radius:4px;padding:2px 6px;display:block;text-align:right;font-variant-numeric:tabular-nums}
+footer{padding:18px 24px;color:var(--mut);font-size:12px;max-width:1100px}
+@media(max-width:700px){main,header,nav{padding-left:12px;padding-right:12px}}
+</style>
+</head>
+<body>
+<header><h1>13F Search <small>mudanças de carteira dos grandes gestores — SEC EDGAR</small></h1></header>
+<nav>
+<button data-t="consenso" class="on">Consenso (balanço)</button>
+<button data-t="gestores">Gestores e rentabilidade</button>
+<button data-t="gestor">Movimentos por gestor</button>
+<button data-t="carteira">Carteiras</button>
+<button data-t="papel">Rastrear papel</button>
+<button data-t="sinal">Consenso × preço</button>
+</nav>
+<main id="main"></main>
+<footer id="foot"></footer>
+<script>
+const D = __DATA__;
+const $ = s => document.querySelector(s);
+const short = {}; D.managers.forEach(m => short[m.slug] = m.manager.split('(')[0].trim());
+const who = {}; D.managers.forEach(m => who[m.slug] = m.manager);
+const trs = Object.keys(D.consensus).sort().reverse();
+const fmt = new Intl.NumberFormat('pt-BR', {maximumFractionDigits: 1});
+const mm = v => v >= 1e9 ? 'US$ ' + fmt.format(v/1e9) + ' bi' : 'US$ ' + fmt.format(v/1e6) + ' mm';
+const pcTag = pc => pc ? `<span class="pc ${pc.toLowerCase()}">${pc.toUpperCase()}</span>` : '';
+const q = p => {const [y,m] = p.split('-'); return 'T' + Math.ceil(+m/3) + ' ' + y;};
+const trLabel = tr => {const [a,b] = tr.split('__'); return q(a) + ' → ' + q(b);};
+let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: ''};
+
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  tab = b.dataset.t;
+  document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
+  render();
+});
+
+function chips(list, cls){ return list.map(s => `<span class="chip ${cls}" title="${who[s]||s}">${short[s]||s}</span>`).join(''); }
+
+function vConsenso(){
+  const rows = (D.consensus[state.tr]||[]).filter(r => {
+    const n = r.opened.length + r.closed.length + r.increased.length + r.decreased.length;
+    if (n < 1) return false;
+    return !state.search || r.issuer.toLowerCase().includes(state.search.toLowerCase());
+  });
+  const minPart = rows.filter(r => r.opened.length + r.closed.length + r.increased.length + r.decreased.length >= 2);
+  const shown = state.search ? rows : (minPart.length ? minPart : rows.slice(0, 80));
+  return `<div class="controls">
+    <select onchange="state.tr=this.value;render()">${trs.map(t => `<option value="${t}" ${t===state.tr?'selected':''}>${trLabel(t)}</option>`).join('')}</select>
+    <input type="text" placeholder="filtrar papel… (Enter)" value="${state.search}" onkeydown="if(event.key==='Enter'){state.search=this.value;render()}">
+    <button class="chip" style="cursor:pointer" onclick="state.search=this.previousElementSibling.value;render()">Buscar</button>
+    <span class="mut sm">${shown.length} papéis ${state.search?'' : '(com 2+ gestores movimentando; use a busca para ver todos)'}</span></div>
+  <table><thead><tr><th>Papel</th><th>Abriram</th><th>Fecharam</th><th>Aumentaram</th><th>Reduziram</th>
+  <th class="num">Balanço</th><th class="num">Valor aberto</th></tr></thead><tbody>
+  ${shown.map(r => `<tr><td><b>${r.issuer}</b>${pcTag(r.put_call)}<div class="mut sm">${r.cusip}</div></td>
+    <td>${chips(r.opened,'g')||'<span class=mut>—</span>'}</td>
+    <td>${chips(r.closed,'r')||'<span class=mut>—</span>'}</td>
+    <td>${chips(r.increased,'gi')||'<span class=mut>—</span>'}</td>
+    <td>${chips(r.decreased,'ri')||'<span class=mut>—</span>'}</td>
+    <td class="num"><span class="badge ${r.net_interest>0?'pos':r.net_interest<0?'neg':'zero'}">${r.net_interest>0?'+':''}${r.net_interest}</span></td>
+    <td class="num">${r.value_open ? mm(r.value_open) : '—'}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+function vGestores(){
+  const cards = D.managers.slice().sort((x,y) => y.latest.total - x.latest.total).map(m => {
+    const perf = (D.performance||{})[m.slug] || [];
+    const valid = perf.filter(p => p.ret != null);
+    let cum = 100; const pts = [[0,100]];
+    valid.forEach((p,i) => { cum *= 1 + p.ret; pts.push([i+1, cum]); });
+    const totRet = cum/100 - 1;
+    const avgCov = valid.length ? valid.reduce((s,p) => s+p.coverage, 0)/valid.length : 0;
+    const W=280, H=64, pad=4;
+    const ys = pts.map(p => p[1]), ymin = Math.min(...ys), ymax = Math.max(...ys);
+    const sx = i => pad + i*(W-2*pad)/Math.max(pts.length-1,1);
+    const sy = v => ymax===ymin ? H/2 : pad + (ymax-v)*(H-2*pad)/(ymax-ymin);
+    const line = pts.map((p,i) => `${sx(i).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(' ');
+    const spark = valid.length ? `<svg width="${W}" height="${H}" style="display:block">
+      <polyline points="${line}" fill="none" stroke="${totRet>=0?'#1e8e4d':'#c0392b'}" stroke-width="2"/></svg>` : '';
+    const top5 = (D.holdings[m.slug][m.latest.period]||[]).slice(0,5)
+      .map(h => `<li><span>${h[1]}${pcTag(h[3])}</span><span class="num">${fmt.format(h[4]/m.latest.total*100)}%</span></li>`).join('');
+    const rets = valid.map(p => `<span class="badge ${p.ret>=0?'pos':'neg'}" title="cobertura ${fmt.format(p.coverage*100)}%">${q(p.to)}: ${p.ret>=0?'+':''}${fmt.format(p.ret*100)}%</span>`).join(' ');
+    return `<div class="card">
+      <h3>${m.manager}</h3>
+      <div class="mut sm" style="margin-bottom:6px">${m.cik ? `CIK ${m.cik} · <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${m.cik}&type=13F-HR" target="_blank">filings na SEC</a> · ` : ''}${m.periods.length} trimestres · último: ${q(m.latest.period)}</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px">
+        <div><div class="mut sm">Carteira 13F</div><b>${mm(m.latest.total)}</b></div>
+        <div><div class="mut sm">Posições</div><b>${m.latest.n}</b></div>
+        <div><div class="mut sm">Retorno estimado acum. (${valid.length} tri)</div>
+          <b style="color:${totRet>=0?'#1e8e4d':'#c0392b'}">${valid.length?(totRet>=0?'+':'')+fmt.format(totRet*100)+'%':'—'}</b></div>
+      </div>
+      ${spark}
+      <div style="margin:8px 0 10px;line-height:2">${rets || '<span class="mut sm">sem trimestres consecutivos suficientes</span>'}</div>
+      <div class="mut sm" style="margin-bottom:4px">Maiores posições:</div><ul>${top5}</ul>
+      ${avgCov ? `<div class="mut sm" style="margin-top:8px">cobertura média do cálculo: ${fmt.format(avgCov*100)}% da carteira</div>` : ''}
+    </div>`;
+  }).join('');
+  return `<p class="mut sm" style="max-width:1000px;margin:0 0 14px">Rentabilidade <b>estimada</b> da parcela long em ações dos EUA:
+  variação de preço (valor ÷ ações do 13F) das posições mantidas entre trimestres, ponderada pelo peso no início do trimestre.
+  Exclui opções, bonds e trades dentro do trimestre — <b>não é a cota oficial do fundo</b>. A série cobre os trimestres coletados
+  (hoje ${D.periods.length}; rode o script com mais histórico para estender).</p>
+  <div class="grid4">${cards}</div>`;
+}
+
+function vGestor(){
+  const gtrs = (D.changes[state.mgr]||[]).map(c => c.from + '__' + c.to).reverse();
+  if (!gtrs.includes(state.gtr)) state.gtr = gtrs[0];
+  const c = (D.changes[state.mgr]||[]).find(x => x.from + '__' + x.to === state.gtr);
+  const item = p => `<li><span>${p.issuer}${pcTag(p.put_call)}</span>
+     <span class="num">${mm(p.value || p.value_prev || 0)}${p.pct != null && p.pct !== -100 ? ` <span class="mut sm">(${p.pct>0?'+':''}${fmt.format(p.pct)}%)</span>`:''}</span></li>`;
+  const sec = (title, cls, arr) => `<div class="card"><h3 class="${cls}">${title} (${arr.length})</h3>
+     <ul>${arr.length ? arr.map(item).join('') : '<li class="mut">nenhum</li>'}</ul></div>`;
+  return `<div class="controls">
+    <select onchange="state.mgr=this.value;render()">${D.managers.map(m => `<option value="${m.slug}" ${m.slug===state.mgr?'selected':''}>${m.manager}</option>`).join('')}</select>
+    <select onchange="state.gtr=this.value;render()">${gtrs.map(t => `<option value="${t}" ${t===state.gtr?'selected':''}>${trLabel(t)}</option>`).join('')}</select></div>
+  ${!c ? '<p class="mut">Sem dados para esse período.</p>' : `<div class="grid4">
+    ${sec('Entradas','g',c.new)} ${sec('Saídas','r',c.exited)}
+    ${sec('Aumentos','gi',c.increased)} ${sec('Reduções','ri',c.decreased)}
+  </div><p class="mut sm">${c.n_unchanged} posições sem mudança relevante (±1%).</p>`}`;
+}
+
+function vCarteira(){
+  const m = D.managers.find(x => x.slug === state.mgr);
+  const per = m.periods[m.periods.length-1];
+  const hold = D.holdings[state.mgr][per];
+  const total = hold.reduce((s,h) => s + h[4], 0);
+  const prevPer = m.periods[m.periods.length-2];
+  const prevKeys = new Set(prevPer ? D.holdings[state.mgr][prevPer].map(h => h[0] + '|' + h[3]) : []);
+  return `<div class="controls">
+    <select onchange="state.mgr=this.value;render()">${D.managers.map(x => `<option value="${x.slug}" ${x.slug===state.mgr?'selected':''}>${x.manager}</option>`).join('')}</select>
+    <span class="mut sm">trimestre ${q(per)} — ${hold.length} posições — ${mm(total)}</span></div>
+  <table><thead><tr><th>#</th><th>Papel</th><th>Classe</th><th class="num">Valor</th>
+  <th class="num">Ações</th><th class="num">% carteira</th><th>vs tri anterior</th></tr></thead><tbody>
+  ${hold.map((h,i) => `<tr><td class="mut">${i+1}</td><td><b>${h[1]}</b>${pcTag(h[3])}<div class="mut sm">${h[0]}</div></td>
+    <td class="sm">${h[2]}</td><td class="num">${mm(h[4])}</td><td class="num">${fmt.format(h[5])}</td>
+    <td class="num">${fmt.format(h[4]/total*100)}%</td>
+    <td>${prevPer && !prevKeys.has(h[0] + '|' + h[3]) ? '<span class="badge pos">NOVA</span>' : ''}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+function vPapel(){
+  const qy = state.psearch.trim().toLowerCase();
+  let body = '<p class="mut">Digite o nome de um papel (ex.: NVIDIA, APPLE, ALPHABET) para ver quem teve posição em cada trimestre.</p>';
+  if (qy.length >= 2) {
+    const keys = new Map();
+    for (const s in D.holdings) for (const p in D.holdings[s])
+      for (const h of D.holdings[s][p])
+        if (h[1].toLowerCase().includes(qy)) keys.set(h[0] + '|' + h[3], h[1] + (h[3] ? ' [' + h[3].toUpperCase() + ']' : ''));
+    body = [...keys].slice(0, 6).map(([k, label]) => {
+      const [cusip, pc] = k.split('|');
+      const held = D.managers.filter(m => m.periods.some(p => (D.holdings[m.slug][p]||[]).some(h => h[0]===cusip && h[3]===pc)));
+      const max = Math.max(...held.flatMap(m => m.periods.flatMap(p => (D.holdings[m.slug][p]||[]).filter(h => h[0]===cusip&&h[3]===pc).map(h => h[4]))));
+      return `<div class="card" style="margin-bottom:14px;overflow-x:auto"><h3>${label} <span class="mut">${cusip}</span></h3>
+      <table class="hm"><thead><tr><th>Gestor</th>${D.periods.map(p => `<th class="num">${q(p)}</th>`).join('')}</tr></thead><tbody>
+      ${held.map(m => `<tr><td>${short[m.slug]}</td>${D.periods.map(p => {
+        const h = (D.holdings[m.slug][p]||[]).find(x => x[0]===cusip && x[3]===pc);
+        if (!h) return '<td class="num mut">·</td>';
+        const a = .15 + .85 * (h[4]/max);
+        return `<td><span class="cell" style="background:rgba(31,111,214,${(a*.55).toFixed(2)});color:${a>.7?'#fff':'#1c2433'}">${fmt.format(h[4]/1e6)}</span></td>`;
+      }).join('')}</tr>`).join('')}
+      </tbody></table><p class="mut sm">valores em US$ mm · “·” = sem posição</p></div>`;
+    }).join('') || '<p class="mut">Nenhum papel encontrado.</p>';
+  }
+  return `<div class="controls"><input type="text" placeholder="buscar papel… (Enter)" value="${state.psearch}"
+    onkeydown="if(event.key==='Enter'){state.psearch=this.value;render()}">
+    <button class="chip" style="cursor:pointer" onclick="state.psearch=this.previousElementSibling.value;render()">Buscar</button></div>${body}`;
+}
+
+
+
+function stockChart(cusip){
+  // nº de gestores com o papel (long, sem opção) por trimestre + índice de preço (base 100)
+  const per = D.periods;
+  const counts = per.map(p => D.managers.filter(m => (D.holdings[m.slug][p]||[]).some(h => h[0]===cusip && !h[3])).length);
+  const idx = [100];
+  for (let i = 1; i < per.length; i++){
+    const r = (D.stock_returns[cusip]||{})[per[i-1] + '__' + per[i]];
+    idx.push(r == null ? idx[i-1] : +(idx[i-1] * (1+r)).toFixed(1));
+  }
+  const W=660, H=210, padL=38, padR=46, padT=14, padB=26;
+  const iw = (W-padL-padR)/per.length;
+  const cmax = Math.max(...counts, 1);
+  const imin = Math.min(...idx), imax = Math.max(...idx);
+  const cy = v => padT + (H-padT-padB) * (1 - v/cmax);
+  const iy = v => imax===imin ? (padT+(H-padT-padB)/2) : padT + (H-padT-padB) * (1 - (v-imin)/(imax-imin));
+  const bars = counts.map((c,i) => `<rect x="${(padL+i*iw+iw*.18).toFixed(1)}" y="${cy(c).toFixed(1)}"
+      width="${(iw*.64).toFixed(1)}" height="${(H-padB-cy(c)).toFixed(1)}" fill="#bcd3f0" rx="3"/>
+    <text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${(cy(c)-4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#66708a">${c}</text>`).join('');
+  const line = idx.map((v,i) => `${(padL+i*iw+iw*.5).toFixed(1)},${iy(v).toFixed(1)}`).join(' ');
+  const dots = idx.map((v,i) => `<circle cx="${(padL+i*iw+iw*.5).toFixed(1)}" cy="${iy(v).toFixed(1)}" r="2.5" fill="#c0392b"/>`).join('');
+  const xlab = per.map((p,i) => `<text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="#66708a">${q(p)}</text>`).join('');
+  return `<svg width="${W}" height="${H}" style="max-width:100%;display:block;margin:6px 0 2px">
+    <text x="${padL}" y="10" font-size="10" fill="#66708a">barras: nº de gestores com o papel</text>
+    <text x="${W-padR}" y="10" font-size="10" fill="#c0392b" text-anchor="end">linha: preço (índice, T0=100)</text>
+    ${bars}<polyline points="${line}" fill="none" stroke="#c0392b" stroke-width="2"/>${dots}
+    <text x="${W-padR+4}" y="${iy(idx[idx.length-1])+3}" font-size="10" fill="#c0392b">${fmt.format(idx[idx.length-1])}</text>
+    ${xlab}</svg>`;
+}
+
+function vSinal(){
+  const S = D.signal_stats || {buckets:[],n_obs:0};
+  const pct = v => v==null ? '—' : (v>=0?'+':'') + fmt.format(v*100) + '%';
+  const statTable = `<div class="card" style="max-width:640px;margin-bottom:16px">
+    <h3>Relação geral (${S.n_obs} casos papel-trimestre)</h3>
+    <table><thead><tr><th>Balanço no trimestre</th><th class="num">Casos</th>
+    <th class="num">Retorno médio no mesmo tri</th><th class="num">Retorno médio no tri seguinte</th></tr></thead><tbody>
+    ${S.buckets.map(b => `<tr><td><span class="badge ${b.label.startsWith('+')?'pos':b.label.startsWith('-')?'neg':'zero'}">${b.label}</span></td>
+      <td class="num">${b.n}</td><td class="num">${pct(b.same)}</td><td class="num">${pct(b.fwd)} <span class="mut sm">(${b.n_fwd})</span></td></tr>`).join('')}
+    </tbody></table>
+    <div class="mut sm" style="margin-top:8px">correlação balanço × retorno: mesmo tri ${S.corr_same ?? '—'} · tri seguinte ${S.corr_fwd ?? '—'}</div>
+  </div>`;
+  const qy = state.psearch.trim().toLowerCase();
+  let body = '';
+  if (qy.length >= 2) {
+    const found = new Map();
+    for (const tr in D.consensus) for (const r of D.consensus[tr])
+      if (!r.put_call && r.issuer.toLowerCase().includes(qy)) found.set(r.cusip, r.issuer);
+    body = [...found].slice(0,4).map(([cusip, issuer]) => {
+      const rows = trs.slice().reverse().map((tr,i,arr) => {
+        const r = (D.consensus[tr]||[]).find(x => x.cusip===cusip && !x.put_call);
+        const ret = (D.stock_returns[cusip]||{})[tr];
+        const nxtTr = arr[i+1];
+        const fwd = nxtTr ? (D.stock_returns[cusip]||{})[nxtTr] : undefined;
+        return {tr, r, ret, fwd};
+      });
+      return `<div class="card" style="margin-bottom:14px;overflow-x:auto"><h3>${issuer} <span class="mut">${cusip}</span></h3>
+      ${stockChart(cusip)}
+      <table><thead><tr><th>Trimestre</th><th>Abriram</th><th>Fecharam</th><th>Aumentaram</th><th>Reduziram</th>
+      <th class="num">Balanço</th><th class="num">Retorno no tri</th><th class="num">Retorno tri seguinte</th></tr></thead><tbody>
+      ${rows.map(({tr,r,ret,fwd}) => `<tr><td>${trLabel(tr)}</td>
+        <td>${r?chips(r.opened,'g')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
+        <td>${r?chips(r.closed,'r')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
+        <td>${r?chips(r.increased,'gi')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
+        <td>${r?chips(r.decreased,'ri')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
+        <td class="num">${r?`<span class="badge ${r.net_interest>0?'pos':r.net_interest<0?'neg':'zero'}">${r.net_interest>0?'+':''}${r.net_interest}</span>`:'—'}</td>
+        <td class="num" style="color:${ret>=0?'#1e8e4d':'#c0392b'}">${pct(ret)}</td>
+        <td class="num" style="color:${fwd>=0?'#1e8e4d':'#c0392b'}">${pct(fwd)}</td></tr>`).join('')}
+      </tbody></table>
+      <p class="mut sm">retorno estimado pela mediana de valor÷ações entre os gestores que carregam o papel; “—” = sem movimento/sem preço observável.</p></div>`;
+    }).join('') || '<p class="mut">Nenhum papel encontrado nos movimentos.</p>';
+  }
+  return `<p class="mut sm" style="max-width:1000px;margin:0 0 14px">Evolução do consenso por papel e a relação com o preço.
+    <b>Atenção:</b> a relação no <i>mesmo</i> trimestre é contemporânea (não dá para operar — o 13F sai até 45 dias depois);
+    o teste honesto é a coluna do <i>tri seguinte</i>. Amostra ainda curta (${D.periods.length} trimestres).</p>
+  ${statTable}
+  <div class="controls"><input type="text" placeholder="buscar papel para ver a evolução… (Enter)" value="${state.psearch}"
+    onkeydown="if(event.key==='Enter'){state.psearch=this.value;render()}">
+    <button class="chip" style="cursor:pointer" onclick="state.psearch=this.previousElementSibling.value;render()">Buscar</button></div>${body}`;
+}
+
+function render(){
+  $('#main').innerHTML = {consenso: vConsenso, gestores: vGestores, gestor: vGestor, carteira: vCarteira, papel: vPapel, sinal: vSinal}[tab]();
+}
+$('#foot').innerHTML = `Gerado em ${D.generated} · ${D.managers.length} gestores · trimestres: ${D.periods.map(q).join(', ')} · ` + D.notes.join(' ') +
+ ' Limitações: 13F cobre apenas posições long em ativos listados nos EUA, com defasagem de até 45 dias; não é recomendação de investimento.';
+render();
+</script>
+</body>
+</html>
