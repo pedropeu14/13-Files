@@ -5,8 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>13F Search — Carteiras dos grandes gestores</title>
 <style>
-:root{--bg:#0b0f17;--panel:#121826;--panel2:#1a2234;--txt:#dbe4f3;--mut:#8593ab;
---grn:#22c07a;--red:#ef5561;--amb:#e8b53a;--acc:#4f8cff;--bord:#232d42;color-scheme:dark}
+:root{--bg:#f5f7fa;--panel:#ffffff;--panel2:#f3f5f9;--txt:#1b2334;--mut:#5b6678;
+--grn:#188a56;--red:#d64550;--amb:#b8860b;--acc:#4f8cff;--bord:#dde3ee;--hover:#f0f4fb;
+--chip-g-bg:#e3f5ea;--chip-g-bd:#b7e0c6;--chip-g-tx:#186a3b;
+--chip-r-bg:#fdeaea;--chip-r-bd:#f0c0c0;--chip-r-tx:#a02020;
+--chip-gi-bg:#eef8f1;--chip-gi-tx:#2d7d4f;--chip-ri-bg:#faeeee;--chip-ri-tx:#a54848;
+--shadow:0 1px 3px rgba(20,30,60,.08);--bar:#bcd3f0;color-scheme:light}
+html[data-theme="dark"]{--bg:#0b0f17;--panel:#121826;--panel2:#1a2234;--txt:#dbe4f3;--mut:#8593ab;
+--grn:#22c07a;--red:#ef5561;--amb:#e8b53a;--bord:#232d42;--hover:#1a2234;
+--chip-g-bg:#14301f;--chip-g-bd:#265c3c;--chip-g-tx:#4ad391;
+--chip-r-bg:#331a1c;--chip-r-bd:#5c2b30;--chip-r-tx:#f0808a;
+--chip-gi-bg:#12281c;--chip-gi-tx:#3aa871;--chip-ri-bg:#2c191b;--chip-ri-tx:#d47a80;
+--shadow:0 1px 3px rgba(0,0,0,.35);--bar:#3a5a94;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;font:14px/1.45 -apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt)}
 header{padding:18px 24px 10px}
@@ -20,29 +30,29 @@ main{padding:18px 24px;max-width:1500px}
 select,input[type=text]{background:var(--panel);color:var(--txt);border:1px solid var(--bord);
 border-radius:8px;padding:8px 10px;font-size:13px;min-width:180px}
 table{border-collapse:collapse;width:100%;background:var(--panel);border-radius:10px;overflow:hidden;
-box-shadow:0 1px 3px rgba(0,0,0,.35)}
+box-shadow:var(--shadow)}
 th{background:var(--panel2);text-align:left;padding:9px 10px;font-size:12px;color:var(--mut);
 text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}
 th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
 th.sortable:hover{color:var(--acc)}
 td{padding:8px 10px;border-top:1px solid var(--bord);vertical-align:top}
-tr:hover td{background:#1a2234}
+tr:hover td{background:var(--hover)}
 .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.chip{display:inline-block;background:#1a2234;border:1px solid var(--bord);border-radius:20px;
+.chip{display:inline-block;background:var(--panel2);border:1px solid var(--bord);border-radius:20px;
 padding:1px 8px;margin:1px 2px;font-size:11.5px;white-space:nowrap}
-.chip.g{background:#14301f;border-color:#265c3c;color:#4ad391}
-.chip.r{background:#331a1c;border-color:#5c2b30;color:#f0808a}
-.chip.gi{background:#12281c;color:#3aa871}.chip.ri{background:#2c191b;color:#d47a80}
+.chip.g{background:var(--chip-g-bg);border-color:var(--chip-g-bd);color:var(--chip-g-tx)}
+.chip.r{background:var(--chip-r-bg);border-color:var(--chip-r-bd);color:var(--chip-r-tx)}
+.chip.gi{background:var(--chip-gi-bg);color:var(--chip-gi-tx)}.chip.ri{background:var(--chip-ri-bg);color:var(--chip-ri-tx)}
 .badge{display:inline-block;border-radius:6px;padding:1px 7px;font-weight:700;font-size:12px}
-.badge.pos{background:#14301f;color:#4ad391}.badge.neg{background:#331a1c;color:#f0808a}
+.badge.pos{background:var(--chip-g-bg);color:var(--chip-g-tx)}.badge.neg{background:var(--chip-r-bg);color:var(--chip-r-tx)}
 .badge.zero{background:var(--panel2);color:var(--mut)}
 .pc{font-size:10.5px;font-weight:700;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px}
-.pc.put{background:#331a1c;color:#f0808a}.pc.call{background:#14301f;color:#4ad391}
+.pc.put{background:var(--chip-r-bg);color:var(--chip-r-tx)}.pc.call{background:var(--chip-g-bg);color:var(--chip-g-tx)}
 .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
 .card{background:var(--panel);border:1px solid var(--bord);border-radius:10px;padding:12px 14px;
-box-shadow:0 1px 3px rgba(0,0,0,.35)}
+box-shadow:var(--shadow)}
 .card h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
-.card h3.g{color:var(--grn)}.card h3.r{color:var(--red)}.card h3.gi{color:#3aa871}.card h3.ri{color:#d47a80}
+.card h3.g{color:var(--grn)}.card h3.r{color:var(--red)}.card h3.gi{color:var(--chip-gi-tx)}.card h3.ri{color:var(--chip-ri-tx)}
 .card ul{list-style:none;margin:0;padding:0}
 .card li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px solid var(--bord);font-size:13px}
 .card li:first-child{border-top:0}
@@ -52,9 +62,19 @@ a{color:var(--acc)}
 .hm .cell{border-radius:4px;padding:2px 6px;display:block;text-align:right;font-variant-numeric:tabular-nums}
 footer{padding:18px 24px;color:var(--mut);font-size:12px;max-width:1100px}
 @media(max-width:700px){main,header,nav{padding-left:12px;padding-right:12px}}
+#theme-toggle{position:fixed;top:14px;right:16px;z-index:30;background:var(--panel);color:var(--txt);
+border:1px solid var(--bord);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:15px}
+#theme-toggle:hover{border-color:var(--acc)}
 </style>
+<script>
+(function(){
+  if(localStorage.getItem('soc:theme')==='dark')
+    document.documentElement.setAttribute('data-theme','dark');
+})();
+</script>
 </head>
 <body>
+<button id="theme-toggle" title="Alternar tema">🌓</button>
 <header><h1>13F Search <small>mudanças de carteira dos grandes gestores — SEC EDGAR</small></h1></header>
 <nav>
 <button data-t="consenso" class="on">Consenso (balanço)</button>
@@ -79,6 +99,11 @@ const q = p => {const [y,m] = p.split('-'); return 'T' + Math.ceil(+m/3) + ' ' +
 const trLabel = tr => {const [a,b] = tr.split('__'); return q(a) + ' → ' + q(b);};
 let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: '', csort: null};
 
+document.getElementById('theme-toggle').onclick = () => {
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  if(dark){ document.documentElement.removeAttribute('data-theme'); localStorage.setItem('soc:theme','light'); }
+  else { document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('soc:theme','dark'); }
+};
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
   tab = b.dataset.t;
   document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
@@ -157,7 +182,7 @@ function vGestores(){
     const sy = v => ymax===ymin ? H/2 : pad + (ymax-v)*(H-2*pad)/(ymax-ymin);
     const line = pts.map((p,i) => `${sx(i).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(' ');
     const spark = valid.length ? `<svg width="${W}" height="${H}" style="display:block">
-      <polyline points="${line}" fill="none" stroke="${totRet>=0?'#22c07a':'#ef5561'}" stroke-width="2"/></svg>` : '';
+      <polyline points="${line}" fill="none" style="stroke:var(${totRet>=0?'--grn':'--red'})" stroke-width="2"/></svg>` : '';
     const top5 = (D.holdings[m.slug][m.latest.period]||[]).slice(0,5)
       .map(h => `<li><span>${h[1]}${pcTag(h[3])}</span><span class="num">${fmt.format(h[4]/m.latest.total*100)}%</span></li>`).join('');
     const rets = valid.map(p => `<span class="badge ${p.ret>=0?'pos':'neg'}" title="cobertura ${fmt.format(p.coverage*100)}%">${q(p.to)}: ${p.ret>=0?'+':''}${fmt.format(p.ret*100)}%</span>`).join(' ');
@@ -168,7 +193,7 @@ function vGestores(){
         <div><div class="mut sm">Carteira 13F</div><b>${mm(m.latest.total)}</b></div>
         <div><div class="mut sm">Posições</div><b>${m.latest.n}</b></div>
         <div><div class="mut sm">Retorno estimado acum. (${valid.length} tri)</div>
-          <b style="color:${totRet>=0?'#22c07a':'#ef5561'}">${valid.length?(totRet>=0?'+':'')+fmt.format(totRet*100)+'%':'—'}</b></div>
+          <b style="color:var(${totRet>=0?'--grn':'--red'})">${valid.length?(totRet>=0?'+':'')+fmt.format(totRet*100)+'%':'—'}</b></div>
       </div>
       ${spark}
       <div style="margin:8px 0 10px;line-height:2">${rets || '<span class="mut sm">sem trimestres consecutivos suficientes</span>'}</div>
@@ -237,7 +262,7 @@ function vPapel(){
         const h = (D.holdings[m.slug][p]||[]).find(x => x[0]===cusip && x[3]===pc);
         if (!h) return '<td class="num mut">·</td>';
         const a = .15 + .85 * (h[4]/max);
-        return `<td><span class="cell" style="background:rgba(79,140,255,${(a*.55).toFixed(2)});color:${a>.7?'#fff':'#dbe4f3'}">${fmt.format(h[4]/1e6)}</span></td>`;
+        return `<td><span class="cell" style="background:rgba(79,140,255,${(a*.55).toFixed(2)});color:${a>.7?'#fff':'var(--txt)'}">${fmt.format(h[4]/1e6)}</span></td>`;
       }).join('')}</tr>`).join('')}
       </tbody></table><p class="mut sm">valores em US$ mm · “·” = sem posição</p></div>`;
     }).join('') || '<p class="mut">Nenhum papel encontrado.</p>';
@@ -265,16 +290,16 @@ function stockChart(cusip){
   const cy = v => padT + (H-padT-padB) * (1 - v/cmax);
   const iy = v => imax===imin ? (padT+(H-padT-padB)/2) : padT + (H-padT-padB) * (1 - (v-imin)/(imax-imin));
   const bars = counts.map((c,i) => `<rect x="${(padL+i*iw+iw*.18).toFixed(1)}" y="${cy(c).toFixed(1)}"
-      width="${(iw*.64).toFixed(1)}" height="${(H-padB-cy(c)).toFixed(1)}" fill="#3a5a94" rx="3"/>
-    <text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${(cy(c)-4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#8593ab">${c}</text>`).join('');
+      width="${(iw*.64).toFixed(1)}" height="${(H-padB-cy(c)).toFixed(1)}" style="fill:var(--bar)" rx="3"/>
+    <text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${(cy(c)-4).toFixed(1)}" text-anchor="middle" font-size="10" style="fill:var(--mut)">${c}</text>`).join('');
   const line = idx.map((v,i) => `${(padL+i*iw+iw*.5).toFixed(1)},${iy(v).toFixed(1)}`).join(' ');
-  const dots = idx.map((v,i) => `<circle cx="${(padL+i*iw+iw*.5).toFixed(1)}" cy="${iy(v).toFixed(1)}" r="2.5" fill="#ef5561"/>`).join('');
-  const xlab = per.map((p,i) => `<text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="#8593ab">${q(p)}</text>`).join('');
+  const dots = idx.map((v,i) => `<circle cx="${(padL+i*iw+iw*.5).toFixed(1)}" cy="${iy(v).toFixed(1)}" r="2.5" style="fill:var(--red)"/>`).join('');
+  const xlab = per.map((p,i) => `<text x="${(padL+i*iw+iw*.5).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="9.5" style="fill:var(--mut)">${q(p)}</text>`).join('');
   return `<svg width="${W}" height="${H}" style="max-width:100%;display:block;margin:6px 0 2px">
-    <text x="${padL}" y="10" font-size="10" fill="#8593ab">barras: nº de gestores com o papel</text>
-    <text x="${W-padR}" y="10" font-size="10" fill="#ef5561" text-anchor="end">linha: preço (índice, T0=100)</text>
-    ${bars}<polyline points="${line}" fill="none" stroke="#ef5561" stroke-width="2"/>${dots}
-    <text x="${W-padR+4}" y="${iy(idx[idx.length-1])+3}" font-size="10" fill="#ef5561">${fmt.format(idx[idx.length-1])}</text>
+    <text x="${padL}" y="10" font-size="10" style="fill:var(--mut)">barras: nº de gestores com o papel</text>
+    <text x="${W-padR}" y="10" font-size="10" style="fill:var(--red)" text-anchor="end">linha: preço (índice, T0=100)</text>
+    ${bars}<polyline points="${line}" fill="none" style="stroke:var(--red)" stroke-width="2"/>${dots}
+    <text x="${W-padR+4}" y="${iy(idx[idx.length-1])+3}" font-size="10" style="fill:var(--red)">${fmt.format(idx[idx.length-1])}</text>
     ${xlab}</svg>`;
 }
 
@@ -314,8 +339,8 @@ function vSinal(){
         <td>${r?chips(r.increased,'gi')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
         <td>${r?chips(r.decreased,'ri')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
         <td class="num">${r?`<span class="badge ${r.net_interest>0?'pos':r.net_interest<0?'neg':'zero'}">${r.net_interest>0?'+':''}${r.net_interest}</span>`:'—'}</td>
-        <td class="num" style="color:${ret>=0?'#22c07a':'#ef5561'}">${pct(ret)}</td>
-        <td class="num" style="color:${fwd>=0?'#22c07a':'#ef5561'}">${pct(fwd)}</td></tr>`).join('')}
+        <td class="num" style="color:var(${ret>=0?'--grn':'--red'})">${pct(ret)}</td>
+        <td class="num" style="color:var(${fwd>=0?'--grn':'--red'})">${pct(fwd)}</td></tr>`).join('')}
       </tbody></table>
       <p class="mut sm">retorno estimado pela mediana de valor÷ações entre os gestores que carregam o papel; “—” = sem movimento/sem preço observável.</p></div>`;
     }).join('') || '<p class="mut">Nenhum papel encontrado nos movimentos.</p>';
