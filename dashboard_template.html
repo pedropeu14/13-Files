@@ -23,6 +23,8 @@ table{border-collapse:collapse;width:100%;background:var(--panel);border-radius:
 box-shadow:0 1px 3px rgba(20,30,60,.08)}
 th{background:var(--panel2);text-align:left;padding:9px 10px;font-size:12px;color:var(--mut);
 text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--acc)}
 td{padding:8px 10px;border-top:1px solid var(--bord);vertical-align:top}
 tr:hover td{background:#f0f4fb}
 .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -75,7 +77,7 @@ const mm = v => v >= 1e9 ? 'US$ ' + fmt.format(v/1e9) + ' bi' : 'US$ ' + fmt.for
 const pcTag = pc => pc ? `<span class="pc ${pc.toLowerCase()}">${pc.toUpperCase()}</span>` : '';
 const q = p => {const [y,m] = p.split('-'); return 'T' + Math.ceil(+m/3) + ' ' + y;};
 const trLabel = tr => {const [a,b] = tr.split('__'); return q(a) + ' → ' + q(b);};
-let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: ''};
+let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: '', csort: null};
 
 document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
   tab = b.dataset.t;
@@ -85,22 +87,53 @@ document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
 
 function chips(list, cls){ return list.map(s => `<span class="chip ${cls}" title="${who[s]||s}">${short[s]||s}</span>`).join(''); }
 
+// quantos gestores detêm cada papel (cusip+put_call) ao fim de um trimestre
+const _holdersCache = {};
+function holdersAt(period){
+  if (_holdersCache[period]) return _holdersCache[period];
+  const m = {};
+  Object.keys(D.holdings).forEach(slug => {
+    (D.holdings[slug][period]||[]).forEach(r => {
+      const k = r[0] + '|' + (r[3]||'');
+      (m[k] = m[k] || []).push(slug);
+    });
+  });
+  return _holdersCache[period] = m;
+}
+function csort(k){
+  state.csort = (state.csort && state.csort.k === k) ? {k, d: -state.csort.d} : {k, d: -1};
+  render();
+}
+
 function vConsenso(){
+  const endP = state.tr.split('__')[1];
+  const hm = holdersAt(endP);
+  const nHold = r => (hm[r.cusip + '|' + (r.put_call||'')] || []).length;
   const rows = (D.consensus[state.tr]||[]).filter(r => {
     const n = r.opened.length + r.closed.length + r.increased.length + r.decreased.length;
     if (n < 1) return false;
     return !state.search || r.issuer.toLowerCase().includes(state.search.toLowerCase());
   });
   const minPart = rows.filter(r => r.opened.length + r.closed.length + r.increased.length + r.decreased.length >= 2);
-  const shown = state.search ? rows : (minPart.length ? minPart : rows.slice(0, 80));
+  let shown = state.search ? rows : (minPart.length ? minPart : rows.slice(0, 80));
+  const keyFns = {papel: r => r.issuer, gestores: nHold,
+    abriram: r => r.opened.length, fecharam: r => r.closed.length,
+    aumentaram: r => r.increased.length, reduziram: r => r.decreased.length,
+    bal: r => r.net_interest, valor: r => r.value_open || 0};
+  if (state.csort && keyFns[state.csort.k]){
+    const f = keyFns[state.csort.k], d = state.csort.d;
+    shown = shown.slice().sort((a,b) => {const x = f(a), y = f(b); return (x<y?-1:x>y?1:0)*d;});
+  }
+  const arrow = k => state.csort && state.csort.k === k ? (state.csort.d > 0 ? ' ▲' : ' ▼') : '';
+  const th = (k, label, cls='') => `<th class="sortable ${cls}" onclick="csort('${k}')" title="clique para ordenar">${label}${arrow(k)}</th>`;
   return `<div class="controls">
     <select onchange="state.tr=this.value;render()">${trs.map(t => `<option value="${t}" ${t===state.tr?'selected':''}>${trLabel(t)}</option>`).join('')}</select>
     <input type="text" placeholder="filtrar papel… (Enter)" value="${state.search}" onkeydown="if(event.key==='Enter'){state.search=this.value;render()}">
     <button class="chip" style="cursor:pointer" onclick="state.search=this.previousElementSibling.value;render()">Buscar</button>
     <span class="mut sm">${shown.length} papéis ${state.search?'' : '(com 2+ gestores movimentando; use a busca para ver todos)'}</span></div>
-  <table><thead><tr><th>Papel</th><th>Abriram</th><th>Fecharam</th><th>Aumentaram</th><th>Reduziram</th>
-  <th class="num">Balanço</th><th class="num">Valor aberto</th></tr></thead><tbody>
+  <table><thead><tr>${th('papel','Papel')}${th('gestores','Gestores','num')}${th('abriram','Abriram')}${th('fecharam','Fecharam')}${th('aumentaram','Aumentaram')}${th('reduziram','Reduziram')}${th('bal','Balanço','num')}${th('valor','Valor aberto','num')}</tr></thead><tbody>
   ${shown.map(r => `<tr><td><b>${r.issuer}</b>${pcTag(r.put_call)}<div class="mut sm">${r.cusip}</div></td>
+    <td class="num" title="gestores com posição ao fim do trimestre"><b>${nHold(r) || '—'}</b><span class="mut sm">/${D.managers.length}</span></td>
     <td>${chips(r.opened,'g')||'<span class=mut>—</span>'}</td>
     <td>${chips(r.closed,'r')||'<span class=mut>—</span>'}</td>
     <td>${chips(r.increased,'gi')||'<span class=mut>—</span>'}</td>
