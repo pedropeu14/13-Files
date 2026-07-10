@@ -380,11 +380,55 @@ function stockChart(cusip){
     ${xlab}</svg>`;
 }
 
+// estatística balanço × retorno calculada AQUI (não mais no gerador), para a
+// faixa de buckets ser configurável — com 38 gestores o balanço passa de ±2.
+function signalStatsJS(range){
+  const trsAsc = Object.keys(D.consensus).sort();
+  const nxt = {}; trsAsc.forEach((t, i) => nxt[t] = trsAsc[i + 1]);
+  const obs = [];
+  for (const tr of trsAsc) for (const r of (D.consensus[tr] || [])){
+    if (r.put_call) continue;
+    const ret = (D.stock_returns[r.cusip] || {})[tr];
+    if (ret == null) continue;
+    const f = nxt[tr] ? (D.stock_returns[r.cusip] || {})[nxt[tr]] : undefined;
+    obs.push({net: r.net_interest, same: ret, fwd: f == null ? null : f});
+  }
+  const buckets = [];
+  for (let k = -range; k <= range; k++){
+    const sel = obs.filter(o => k === -range ? o.net <= k : k === range ? o.net >= k : o.net === k);
+    const fw = sel.filter(o => o.fwd !== null);
+    buckets.push({label: k === -range ? `${k} ou menos` : k === range ? `+${k} ou mais` : (k > 0 ? `+${k}` : `${k}`),
+      n: sel.length,
+      same: sel.length ? sel.reduce((a, o) => a + o.same, 0) / sel.length : null,
+      fwd: fw.length ? fw.reduce((a, o) => a + o.fwd, 0) / fw.length : null,
+      n_fwd: fw.length});
+  }
+  const corr = (pairs) => {
+    if (pairs.length < 3) return null;
+    const mx = pairs.reduce((a, p) => a + p[0], 0) / pairs.length;
+    const my = pairs.reduce((a, p) => a + p[1], 0) / pairs.length;
+    let cov = 0, vx = 0, vy = 0;
+    for (const [x, y] of pairs){ cov += (x - mx) * (y - my); vx += (x - mx) ** 2; vy += (y - my) ** 2; }
+    return vx && vy ? +(cov / Math.sqrt(vx * vy)).toFixed(3) : null;
+  };
+  return {buckets, n_obs: obs.length,
+    corr_same: corr(obs.map(o => [o.net, o.same])),
+    corr_fwd: corr(obs.filter(o => o.fwd !== null).map(o => [o.net, o.fwd]))};
+}
+
 function vSinal(){
-  const S = D.signal_stats || {buckets:[],n_obs:0};
+  const range = state.srange || 4;
+  const S = signalStatsJS(range);
   const pct = v => v==null ? '—' : (v>=0?'+':'') + fmt.format(v*100) + '%';
-  const statTable = `<div class="card" style="max-width:640px;margin-bottom:16px">
+  const statTable = `<div class="card" style="max-width:680px;margin-bottom:16px">
     <h3>Relação geral (${S.n_obs} casos papel-trimestre)</h3>
+    <div class="controls" style="margin:6px 0 10px">
+      <label class="mut sm">faixa do balanço:&nbsp;</label>
+      <select onchange="state.srange=+this.value;render()">
+        ${[2,3,4,5].map(r => `<option value="${r}" ${range===r?'selected':''}>±${r}</option>`).join('')}
+      </select>
+      <span class="mut sm">extremos agregam ("ou mais/menos"); buckets largos ficam finos — leia o nº de casos.</span>
+    </div>
     <table><thead><tr><th>Balanço no trimestre</th><th class="num">Casos</th>
     <th class="num">Retorno médio no mesmo tri</th><th class="num">Retorno médio no tri seguinte</th></tr></thead><tbody>
     ${S.buckets.map(b => `<tr><td><span class="badge ${b.label.startsWith('+')?'pos':b.label.startsWith('-')?'neg':'zero'}">${b.label}</span></td>
