@@ -1,0 +1,33 @@
+{
+  "_comment": "Curadoria manual de páginas de cartas/comunicações por gestor (slug do 13F Search). radar.py apenas repassa; adicione/edite à vontade. Gestores sem fonte pública estável ficam de fora — melhor ausência declarada que link quebrado.",
+  "pershing": [
+    { "title": "Pershing Square Holdings — Letters to Shareholders", "url": "https://pershingsquareholdings.com/company-reports/letters-to-shareholders/" }
+  ],
+  "thirdpoint": [
+    { "title": "Third Point — Quarterly Letters", "url": "https://thirdpointlimited.com/quarterly-letters/" }
+  ],
+  "fundsmith": [
+    { "title": "Fundsmith — Annual Letters to Shareholders", "url": "https://www.fundsmith.co.uk/fund-factsheet/annual-letters/" }
+  ],
+  "berkshire": [
+    { "title": "Berkshire Hathaway — Warren Buffett's Letters", "url": "https://www.berkshirehathaway.com/letters/letters.html" }
+  ],
+  "semper": [
+    { "title": "Semper Augustus — Annual Letters (Chris Bloomstran)", "url": "https://www.semperaugustus.com/clientletters" }
+  ],
+  "giverny": [
+    { "title": "Giverny Capital — Letters to Partners", "url": "https://givernycapital.com/en/letters-to-our-partners/" }
+  ],
+  "akre": [
+    { "title": "Akre Capital — Quarterly Commentary", "url": "https://www.akrecapital.com/quarterly-commentary/" }
+  ],
+  "icahn": [
+    { "title": "Icahn Enterprises — Investor News (cartas abertas saem como press release)", "url": "https://investor.ielp.com/news-events/press-releases" }
+  ],
+  "trian": [
+    { "title": "Trian Partners — White Papers & Letters", "url": "https://trianpartners.com/white-papers/" }
+  ],
+  "gates": [
+    { "title": "Gates Foundation Trust — Annual Reports", "url": "https://www.gatesfoundation.org/about/financials" }
+  ]
+}

@@ -83,6 +83,7 @@ border:1px solid var(--bord);border-radius:8px;padding:6px 10px;cursor:pointer;f
 <button data-t="carteira">Carteiras</button>
 <button data-t="papel">Rastrear papel</button>
 <button data-t="sinal">Consenso × preço</button>
+<button data-t="radar">Radar (13D · cartas · notícias)</button>
 </nav>
 <main id="main"></main>
 <footer id="foot"></footer>
@@ -97,7 +98,7 @@ const mm = v => v >= 1e9 ? 'US$ ' + fmt.format(v/1e9) + ' bi' : 'US$ ' + fmt.for
 const pcTag = pc => pc ? `<span class="pc ${pc.toLowerCase()}">${pc.toUpperCase()}</span>` : '';
 const q = p => {const [y,m] = p.split('-'); return 'T' + Math.ceil(+m/3) + ' ' + y;};
 const trLabel = tr => {const [a,b] = tr.split('__'); return q(a) + ' → ' + q(b);};
-let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: '', csort: null};
+let tab = 'consenso', state = {tr: trs[0], mgr: D.managers[0].slug, gtr: trs[0], search: '', psearch: '', csort: null, rmgr: '', rtype: ''};
 
 document.getElementById('theme-toggle').onclick = () => {
   const dark = document.documentElement.getAttribute('data-theme')==='dark';
@@ -128,6 +129,82 @@ function holdersAt(period){
 function csort(k){
   state.csort = (state.csort && state.csort.k === k) ? {k, d: -state.csort.d} : {k, d: -1};
   render();
+}
+
+// ---- Radar: filings rápidos (13D/G), notícias e cartas — antes dos 45 dias do 13F
+let RADAR = null, radarLoading = false;
+function radarBadge(form){
+  if (/13D/.test(form)) return '<span class="badge neg" title="Obrigatório em até 5 dias úteis após cruzar 5% ou mudança material — mudança de carteira divulgada em DIAS">'+form+'</span>';
+  if (/13G/.test(form)) return '<span class="badge zero" title="Participação passiva >5%">'+form+'</span>';
+  if (/13F/.test(form)) return '<span class="badge pos" title="O trimestral (defasagem de até 45 dias)">'+form+'</span>';
+  return '<span class="badge zero">'+form+'</span>';
+}
+function vRadar(){
+  if (!RADAR){
+    if (!radarLoading){
+      radarLoading = true;
+      fetch('radar.json', {cache: 'no-cache'}).then(r => r.json())
+        .then(d => { RADAR = d; if (tab === 'radar') render(); })
+        .catch(e => { RADAR = {error: String(e)}; if (tab === 'radar') render(); });
+    }
+    return '<p class="mut">Carregando radar…</p>';
+  }
+  if (RADAR.error) return '<p class="mut">radar.json indisponível ('+RADAR.error+') — rode <code>python radar.py</code> e republique.</p>';
+
+  const mgrs = Object.entries(RADAR.managers);
+  const items = [];
+  for (const [slug, m] of mgrs){
+    if (state.rmgr && slug !== state.rmgr) continue;
+    const nm = short[slug] || m.name;
+    for (const f of m.filings){
+      const hot = /13D/.test(f.form), passive = /13G/.test(f.form);
+      const kind = hot || passive ? 'schedule' : 'f13';
+      if (state.rtype && state.rtype !== kind) continue;
+      items.push({date: f.date, kind, html:
+        `${radarBadge(f.form)} <b>${nm}</b>` +
+        (f.target ? ` → <b>${f.target}</b>` : '') +
+        ` · <a href="${f.url}" target="_blank">abrir filing</a>`});
+    }
+    if (!state.rtype || state.rtype === 'news'){
+      for (const n of m.news){
+        if (!n.date) continue;
+        items.push({date: n.date, kind: 'news', html:
+          `<span class="chip">notícia</span> <b>${nm}</b> · <a href="${n.url}" target="_blank">${n.title}</a>`});
+      }
+    }
+  }
+  items.sort((a, b) => b.date < a.date ? -1 : b.date > a.date ? 1 : 0);
+  const shown = items.slice(0, 250);
+
+  const letters = mgrs.filter(([s, m]) => m.letters.length && (!state.rmgr || s === state.rmgr));
+  const lettersHtml = letters.length ? `<div class="card" style="margin-bottom:14px"><h3>Cartas e comunicações (curadoria)</h3><ul>` +
+    letters.map(([s, m]) => m.letters.map(l =>
+      `<li><span>${short[s] || s}</span><span><a href="${l.url}" target="_blank">${l.title}</a></span></li>`).join('')).join('') +
+    `</ul><div class="mut sm" style="margin-top:6px">Fontes estáveis mantidas à mão em letters.json — gestores sem página pública de cartas (Baupost, Scion…) ficam de fora, declaradamente.</div></div>` : '';
+
+  return `<p class="mut sm" style="max-width:1000px;margin:0 0 12px">
+    O 13F chega com até 45 dias de atraso — mas <b>Schedule 13D e emendas são obrigatórios em até 5 dias úteis</b>
+    quando o gestor cruza 5% de uma empresa ou muda materialmente a posição/intenção: é mudança de carteira
+    divulgada em dias, direto da SEC. 13G/A cobre participações passivas. Notícias (Google News) são ruído
+    jornalístico — sinal fraco, às vezes antecipa. Atualizado ${RADAR.generated ? RADAR.generated.slice(0, 10) : ''} ·
+    janela de ${RADAR.lookback_days} dias.</p>
+  <div class="controls">
+    <select onchange="state.rmgr=this.value;render()">
+      <option value="">todos os gestores</option>
+      ${mgrs.map(([s, m]) => `<option value="${s}" ${state.rmgr === s ? 'selected' : ''}>${m.name}</option>`).join('')}
+    </select>
+    <select onchange="state.rtype=this.value;render()">
+      <option value="">tudo</option>
+      <option value="schedule" ${state.rtype === 'schedule' ? 'selected' : ''}>só 13D/13G (rápidos)</option>
+      <option value="f13" ${state.rtype === 'f13' ? 'selected' : ''}>só 13F (trimestral)</option>
+      <option value="news" ${state.rtype === 'news' ? 'selected' : ''}>só notícias</option>
+    </select>
+    <span class="mut sm">${shown.length} eventos</span>
+  </div>
+  ${lettersHtml}
+  <table><thead><tr><th style="width:110px">Data</th><th>Evento</th></tr></thead><tbody>
+  ${shown.map(i => `<tr><td class="num">${i.date}</td><td>${i.html}</td></tr>`).join('')}
+  </tbody></table>`;
 }
 
 function vConsenso(){
@@ -355,7 +432,7 @@ function vSinal(){
 }
 
 function render(){
-  $('#main').innerHTML = {consenso: vConsenso, gestores: vGestores, gestor: vGestor, carteira: vCarteira, papel: vPapel, sinal: vSinal}[tab]();
+  $('#main').innerHTML = {consenso: vConsenso, gestores: vGestores, gestor: vGestor, carteira: vCarteira, papel: vPapel, sinal: vSinal, radar: vRadar}[tab]();
 }
 $('#foot').innerHTML = `Gerado em ${D.generated} · ${D.managers.length} gestores · trimestres: ${D.periods.map(q).join(', ')} · ` + D.notes.join(' ') +
  ' Limitações: 13F cobre apenas posições long em ativos listados nos EUA, com defasagem de até 45 dias; não é recomendação de investimento.';
