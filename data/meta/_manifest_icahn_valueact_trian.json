@@ -1,0 +1,35 @@
+{
+  "icahn": {"manager": "Icahn Capital LP (Carl Icahn)", "sec_name": "ICAHN CARL C", "cik": "0000921669", "cik_note": "13F filings are made under Carl C. Icahn's individual CIK; confirmed via EDGAR full-text search for 'Icahn Capital' (all hits ciks=0000921669).",
+    "filings": [
+      {"period": "2024-06-30", "form": "13F-HR", "adsh": "0001539497-24-001704", "file_date": "2024-08-14"},
+      {"period": "2024-09-30", "form": "13F-HR", "adsh": "0001539497-24-002435", "file_date": "2024-11-14"},
+      {"period": "2024-12-31", "form": "13F-HR", "adsh": "0001539497-25-000660", "file_date": "2025-02-14"},
+      {"period": "2025-03-31", "form": "13F-HR", "adsh": "0001539497-25-001390", "file_date": "2025-05-15"},
+      {"period": "2025-06-30", "form": "13F-HR", "adsh": "0001539497-25-002145", "file_date": "2025-08-14"},
+      {"period": "2025-09-30", "form": "13F-HR", "adsh": "0001539497-25-002973", "file_date": "2025-11-14"},
+      {"period": "2025-12-31", "form": "13F-HR", "adsh": "0001539497-26-000679", "file_date": "2026-02-17"},
+      {"period": "2026-03-31", "form": "13F-HR", "adsh": "0001539497-26-001469", "file_date": "2026-05-15"}
+    ]},
+  "valueact": {"manager": "ValueAct Capital (Mason Morfit)", "sec_name": "ValueAct Holdings, L.P.", "cik": "0001418814",
+    "filings": [
+      {"period": "2024-06-30", "form": "13F-HR", "adsh": "0001418812-24-000017", "file_date": "2024-08-14"},
+      {"period": "2024-09-30", "form": "13F-HR/A", "adsh": "0001418812-24-000022", "file_date": "2024-11-15", "note": "amends 13F-HR 0001418812-24-000021 filed 2024-11-14"},
+      {"period": "2024-12-31", "form": "13F-HR", "adsh": "0001418812-25-000004", "file_date": "2025-02-14"},
+      {"period": "2025-03-31", "form": "13F-HR", "adsh": "0001418812-25-000015", "file_date": "2025-05-15"},
+      {"period": "2025-06-30", "form": "13F-HR", "adsh": "0001418812-25-000025", "file_date": "2025-08-14"},
+      {"period": "2025-09-30", "form": "13F-HR", "adsh": "0001418814-25-000003", "file_date": "2025-11-14"},
+      {"period": "2025-12-31", "form": "13F-HR", "adsh": "0001418814-26-000001", "file_date": "2026-02-17"},
+      {"period": "2026-03-31", "form": "13F-HR", "adsh": "0001418814-26-000002", "file_date": "2026-05-15"}
+    ]},
+  "trian": {"manager": "Trian Fund Management (Nelson Peltz)", "sec_name": "TRIAN FUND MANAGEMENT, L.P.", "cik": "0001345471",
+    "filings": [
+      {"period": "2024-06-30", "form": "13F-HR", "adsh": "0001345471-24-000032", "file_date": "2024-08-14"},
+      {"period": "2024-09-30", "form": "13F-HR", "adsh": "0001345471-24-000040", "file_date": "2024-11-13"},
+      {"period": "2024-12-31", "form": "13F-HR", "adsh": "0001345471-25-000009", "file_date": "2025-02-14"},
+      {"period": "2025-03-31", "form": "13F-HR", "adsh": "0001345471-25-000018", "file_date": "2025-05-15"},
+      {"period": "2025-06-30", "form": "13F-HR", "adsh": "0001345471-25-000028", "file_date": "2025-08-14"},
+      {"period": "2025-09-30", "form": "13F-HR", "adsh": "0001345471-25-000051", "file_date": "2025-11-14"},
+      {"period": "2025-12-31", "form": "13F-HR", "adsh": "0001345471-26-000015", "file_date": "2026-02-17"},
+      {"period": "2026-03-31", "form": "13F-HR", "adsh": "0001345471-26-000026", "file_date": "2026-05-15"}
+    ]}
+}

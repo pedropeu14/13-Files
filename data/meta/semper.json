@@ -1,0 +1,72 @@
+{
+ "slug": "semper",
+ "manager": "Semper Augustus (Chris Bloomstran)",
+ "cik": "0001115373",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-003568",
+   "file_date": "2024-08-14",
+   "n_positions": 39,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-005284",
+   "file_date": "2024-11-14",
+   "n_positions": 37,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-001116",
+   "file_date": "2025-02-14",
+   "n_positions": 37,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-002345",
+   "file_date": "2025-05-15",
+   "n_positions": 36,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-003548",
+   "file_date": "2025-08-15",
+   "n_positions": 37,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-005018",
+   "file_date": "2025-11-14",
+   "n_positions": 38,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-001092",
+   "file_date": "2026-02-17",
+   "n_positions": 39,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001941040-26-000373",
+   "file_date": "2026-05-15",
+   "n_positions": 44,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

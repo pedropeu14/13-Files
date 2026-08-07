@@ -1,0 +1,72 @@
+{
+ "slug": "berkshire",
+ "manager": "Berkshire Hathaway (Warren Buffett)",
+ "cik": "0001067983",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000950123-24-008740",
+   "file_date": "2024-08-14",
+   "n_positions": 129,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000950123-24-011775",
+   "file_date": "2024-11-14",
+   "n_positions": 121,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0000950123-25-002701",
+   "file_date": "2025-02-14",
+   "n_positions": 112,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR/A",
+   "adsh": "0000950123-25-008361",
+   "file_date": "2025-08-14",
+   "n_positions": 114,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0000950123-25-008343",
+   "file_date": "2025-08-14",
+   "n_positions": 114,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001193125-25-282901",
+   "file_date": "2025-11-14",
+   "n_positions": 115,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001193125-26-054580",
+   "file_date": "2026-02-17",
+   "n_positions": 110,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001193125-26-226661",
+   "file_date": "2026-05-15",
+   "n_positions": 90,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

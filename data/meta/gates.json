@@ -1,0 +1,72 @@
+{
+ "slug": "gates",
+ "manager": "Gates Foundation Trust",
+ "cik": "0001166559",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001104659-24-089650",
+   "file_date": "2024-08-14",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001104659-24-119000",
+   "file_date": "2024-11-14",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001104659-25-014123",
+   "file_date": "2025-02-14",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001104659-25-049456",
+   "file_date": "2025-05-15",
+   "n_positions": 25,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001104659-25-078647",
+   "file_date": "2025-08-14",
+   "n_positions": 25,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001104659-25-112544",
+   "file_date": "2025-11-14",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001104659-26-016458",
+   "file_date": "2026-02-17",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001104659-26-062592",
+   "file_date": "2026-05-15",
+   "n_positions": 22,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

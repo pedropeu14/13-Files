@@ -1,0 +1,72 @@
+{
+ "slug": "elliott",
+ "manager": "Elliott Investment Mgmt (Paul Singer)",
+ "cik": "0001791786",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-24-000660",
+   "file_date": "2024-08-14",
+   "n_positions": 54,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-24-000968",
+   "file_date": "2024-11-14",
+   "n_positions": 59,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR/A",
+   "adsh": "0001013594-25-000512",
+   "file_date": "2025-04-28",
+   "n_positions": 45,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-000678",
+   "file_date": "2025-05-15",
+   "n_positions": 41,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR/A",
+   "adsh": "0001013594-25-001443",
+   "file_date": "2025-11-14",
+   "n_positions": 31,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-001440",
+   "file_date": "2025-11-14",
+   "n_positions": 35,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-26-000272",
+   "file_date": "2026-02-18",
+   "n_positions": 34,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-26-000613",
+   "file_date": "2026-05-15",
+   "n_positions": 33,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

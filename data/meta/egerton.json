@@ -1,0 +1,72 @@
+{
+ "slug": "egerton",
+ "manager": "Egerton Capital",
+ "cik": "0001581811",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001581811-24-000007",
+   "file_date": "2024-08-13",
+   "n_positions": 26,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001581811-24-000009",
+   "file_date": "2024-11-05",
+   "n_positions": 30,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001581811-25-000004",
+   "file_date": "2025-02-10",
+   "n_positions": 30,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001581811-25-000005",
+   "file_date": "2025-05-06",
+   "n_positions": 27,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001581811-25-000007",
+   "file_date": "2025-08-12",
+   "n_positions": 25,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001581811-25-000010",
+   "file_date": "2025-11-12",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001581811-26-000002",
+   "file_date": "2026-02-11",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001581811-26-000005",
+   "file_date": "2026-05-13",
+   "n_positions": 24,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

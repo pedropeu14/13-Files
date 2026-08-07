@@ -1,0 +1,80 @@
+{
+ "slug": "viking",
+ "manager": "Viking Global (Andreas Halvorsen)",
+ "cik": "0001103804",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-24-002226",
+   "file_date": "2024-08-14",
+   "n_positions": 82,
+   "total_value_usd": 26019824561,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001103804-24-000006",
+   "file_date": "2024-11-14",
+   "n_positions": 83,
+   "total_value_usd": 27435458361,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001103804-25-000002",
+   "file_date": "2025-02-14",
+   "n_positions": 86,
+   "total_value_usd": 30900114396,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001103804-25-000004",
+   "file_date": "2025-05-15",
+   "n_positions": 91,
+   "total_value_usd": 31475977035,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001103804-25-000007",
+   "file_date": "2025-08-14",
+   "n_positions": 83,
+   "total_value_usd": 34589864590,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001103804-25-000010",
+   "file_date": "2025-11-14",
+   "n_positions": 78,
+   "total_value_usd": 38504949476,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001103804-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 76,
+   "total_value_usd": 37677848898,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001103804-26-000004",
+   "file_date": "2026-05-15",
+   "n_positions": 77,
+   "total_value_usd": 35748670967,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

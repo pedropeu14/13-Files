@@ -1,0 +1,72 @@
+{
+ "slug": "glenview",
+ "manager": "Glenview Capital (Larry Robbins)",
+ "cik": "0001138995",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-24-002216",
+   "file_date": "2024-08-14",
+   "n_positions": 48,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-24-003140",
+   "file_date": "2024-11-14",
+   "n_positions": 46,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0000905148-25-000645",
+   "file_date": "2025-02-14",
+   "n_positions": 36,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0000905148-25-001735",
+   "file_date": "2025-05-15",
+   "n_positions": 45,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-25-002959",
+   "file_date": "2025-08-14",
+   "n_positions": 43,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-25-004016",
+   "file_date": "2025-11-14",
+   "n_positions": 54,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0000905148-26-000846",
+   "file_date": "2026-02-17",
+   "n_positions": 57,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0000905148-26-002354",
+   "file_date": "2026-05-15",
+   "n_positions": 44,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

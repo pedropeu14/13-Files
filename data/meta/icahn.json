@@ -1,0 +1,72 @@
+{
+ "slug": "icahn",
+ "manager": "Icahn Capital (Carl Icahn)",
+ "cik": "0000921669",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001539497-24-001704",
+   "file_date": "2024-08-14",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001539497-24-002435",
+   "file_date": "2024-11-14",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001539497-25-000660",
+   "file_date": "2025-02-14",
+   "n_positions": 20,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001539497-25-001390",
+   "file_date": "2025-05-15",
+   "n_positions": 21,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001539497-25-002145",
+   "file_date": "2025-08-14",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001539497-25-002973",
+   "file_date": "2025-11-14",
+   "n_positions": 20,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001539497-26-000679",
+   "file_date": "2026-02-17",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001539497-26-001469",
+   "file_date": "2026-05-15",
+   "n_positions": 18,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

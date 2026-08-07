@@ -1,0 +1,72 @@
+{
+ "slug": "lonepine",
+ "manager": "Lone Pine Capital (Stephen Mandel)",
+ "cik": "0001061165",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-24-005150",
+   "file_date": "2024-08-14",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-24-006633",
+   "file_date": "2024-11-14",
+   "n_positions": 29,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-001072",
+   "file_date": "2025-02-14",
+   "n_positions": 30,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-002417",
+   "file_date": "2025-05-15",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-003627",
+   "file_date": "2025-08-14",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-004988",
+   "file_date": "2025-11-14",
+   "n_positions": 25,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-26-001084",
+   "file_date": "2026-02-17",
+   "n_positions": 32,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-003439",
+   "file_date": "2026-05-15",
+   "n_positions": 36,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

@@ -1,0 +1,72 @@
+{
+ "slug": "altimeter",
+ "manager": "Altimeter Capital (Brad Gerstner)",
+ "cik": "0001541617",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001541617-24-000007",
+   "file_date": "2024-08-14",
+   "n_positions": 20,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001541617-24-000009",
+   "file_date": "2024-11-14",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001541617-25-000002",
+   "file_date": "2025-02-14",
+   "n_positions": 24,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001541617-25-000005",
+   "file_date": "2025-05-15",
+   "n_positions": 22,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001541617-25-000009",
+   "file_date": "2025-08-14",
+   "n_positions": 18,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001541617-25-000013",
+   "file_date": "2025-11-14",
+   "n_positions": 23,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001541617-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 18,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001541617-26-000006",
+   "file_date": "2026-05-15",
+   "n_positions": 13,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

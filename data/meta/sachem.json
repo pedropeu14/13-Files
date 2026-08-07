@@ -1,0 +1,72 @@
+{
+ "slug": "sachem",
+ "manager": "Sachem Head (Scott Ferguson)",
+ "cik": "0001582090",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-24-005129",
+   "file_date": "2024-08-14",
+   "n_positions": 16,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-24-006591",
+   "file_date": "2024-11-14",
+   "n_positions": 14,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-001012",
+   "file_date": "2025-02-14",
+   "n_positions": 14,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-002381",
+   "file_date": "2025-05-15",
+   "n_positions": 16,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-003631",
+   "file_date": "2025-08-14",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-25-005023",
+   "file_date": "2025-11-14",
+   "n_positions": 19,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-26-000995",
+   "file_date": "2026-02-13",
+   "n_positions": 20,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0000902664-26-002506",
+   "file_date": "2026-05-15",
+   "n_positions": 19,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

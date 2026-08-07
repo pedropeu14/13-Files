@@ -1,0 +1,72 @@
+{
+ "slug": "perceptive",
+ "manager": "Perceptive Advisors (Joseph Edelman)",
+ "cik": "0001224962",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR/A",
+   "adsh": "0001012975-24-000346",
+   "file_date": "2024-08-16",
+   "n_positions": 105,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001012975-24-000488",
+   "file_date": "2024-11-14",
+   "n_positions": 105,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001012975-25-000090",
+   "file_date": "2025-02-14",
+   "n_positions": 99,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR/A",
+   "adsh": "0001012975-25-000422",
+   "file_date": "2025-08-06",
+   "n_positions": 87,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001012975-25-000446",
+   "file_date": "2025-08-14",
+   "n_positions": 85,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001012975-25-000762",
+   "file_date": "2025-11-14",
+   "n_positions": 93,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001012975-26-000155",
+   "file_date": "2026-02-17",
+   "n_positions": 105,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR/A",
+   "adsh": "0001012975-26-000499",
+   "file_date": "2026-05-29",
+   "n_positions": 94,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": []
+}

@@ -1,0 +1,59 @@
+{
+ "slug": "scion",
+ "manager": "Scion Asset Management (Michael Burry)",
+ "cik": "0001649339",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-24-002196",
+   "file_date": "2024-08-14",
+   "n_positions": 10,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000905148-24-003106",
+   "file_date": "2024-11-14",
+   "n_positions": 11,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001879202-25-000012",
+   "file_date": "2025-02-14",
+   "n_positions": 13,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001879202-25-000025",
+   "file_date": "2025-05-15",
+   "n_positions": 7,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001879202-25-000038",
+   "file_date": "2025-08-14",
+   "n_positions": 15,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001649339-25-000007",
+   "file_date": "2025-11-03",
+   "n_positions": 8,
+   "status": "CACHED"
+  }
+ ],
+ "missing_periods": [
+  "2025-12-31",
+  "2026-03-31"
+ ]
+}

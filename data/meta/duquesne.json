@@ -1,0 +1,73 @@
+{
+ "slug": "duquesne",
+ "manager": "Duquesne Family Office (Druckenmiller)",
+ "cik": "0001536411",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001536411-24-000007",
+   "file_date": "2024-08-14",
+   "n_positions": 64,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001536411-24-000009",
+   "file_date": "2024-11-14",
+   "n_positions": 75,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001536411-25-000006",
+   "file_date": "2025-02-14",
+   "n_positions": 78,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001536411-25-000008",
+   "file_date": "2025-05-15",
+   "n_positions": 52,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001536411-25-000011",
+   "file_date": "2025-08-15",
+   "n_positions": 69,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001536411-25-000017",
+   "file_date": "2025-11-14",
+   "n_positions": 65,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001536411-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 62,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001536411-26-000004",
+   "file_date": "2026-05-15",
+   "n_positions": 70,
+   "total_value_usd": 3376828,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}
