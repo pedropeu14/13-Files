@@ -1,0 +1,60 @@
+name: Atualizar 13F (carteiras + dashboard)
+
+on:
+  schedule:
+    # Prazo do 13F: 45 dias após o fim do trimestre — 14/fev, 15/mai, 14/ago, 14/nov.
+    # Roda diariamente do dia 14 ao 28 nos meses de divulgação, para pegar os
+    # filings conforme eles chegam (a maioria sai no próprio dia do prazo).
+    - cron: "0 12 14-28 2,5,8,11 *"
+    # Fora da janela, uma vez por semana — pega emendas (13F-HR/A) e atrasados.
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: 13f-update
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Coletar SEC EDGAR, analisar e gerar o dashboard
+        env:
+          # A SEC exige User-Agent identificável. Defina o secret SEC_USER_AGENT
+          # como "Nome Sobrenome email@dominio.com" para não usar o padrão.
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || 'Pedro Amorim pedrof.amorim@gmail.com (13F research)' }}
+        run: python 13f_search.py all
+
+      - name: Resumo da rodada
+        if: always()
+        run: |
+          if [ -f data/meta/_run.json ]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          r = json.load(open("data/meta/_run.json"))
+          print(f"## Trimestre {r['latest_period']}\n")
+          print(f"- Arquivaram: **{len(r['reported_latest'])}/{r['n_managers']}**")
+          if r["missing_latest"]:
+              print(f"- Sem filing: {', '.join(r['missing_latest'])}")
+          for e in r["errors"]:
+              print(f"- FALHA `{e['slug']}`: {e['error']}")
+          PY
+          fi
+
+      - name: Commitar se mudou (o push republica o Pages)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add 13f_dashboard.html data
+          git diff --cached --quiet || git commit -m "13f: atualiza carteiras $(date -u +%F)"
+          git push
