@@ -61,6 +61,11 @@ a{color:var(--acc)}
 .hm td{padding:4px 6px;font-size:12px}
 .hm .cell{border-radius:4px;padding:2px 6px;display:block;text-align:right;font-variant-numeric:tabular-nums}
 footer{padding:18px 24px;color:var(--mut);font-size:12px;max-width:1100px}
+#cover{margin:14px 24px -4px;padding:9px 13px;border-radius:8px;font-size:12.5px;
+border:1px solid var(--bord);background:var(--panel);box-shadow:var(--shadow)}
+#cover.warn{border-color:var(--amb);background:var(--chip-r-bg)}
+#cover b{color:var(--txt)}
+@media(max-width:700px){#cover{margin-left:12px;margin-right:12px}}
 @media(max-width:700px){main,header,nav{padding-left:12px;padding-right:12px}}
 #theme-toggle{position:fixed;top:14px;right:16px;z-index:30;background:var(--panel);color:var(--txt);
 border:1px solid var(--bord);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:15px}
@@ -77,7 +82,7 @@ border:1px solid var(--bord);border-radius:8px;padding:6px 10px;cursor:pointer;f
 <button id="theme-toggle" title="Alternar tema">🌓</button>
 <header><h1>13F Search <small>mudanças de carteira dos grandes gestores — SEC EDGAR</small></h1></header>
 <nav>
-<button data-t="consenso" class="on">Consenso (balanço)</button>
+<button data-t="consenso" class="on">Consenso</button>
 <button data-t="gestores">Gestores e rentabilidade</button>
 <button data-t="gestor">Movimentos por gestor</button>
 <button data-t="carteira">Carteiras</button>
@@ -85,6 +90,7 @@ border:1px solid var(--bord);border-radius:8px;padding:6px 10px;cursor:pointer;f
 <button data-t="sinal">Consenso × preço</button>
 <button data-t="radar">Radar (13D · cartas · notícias)</button>
 </nav>
+<div id="cover"></div>
 <main id="main"></main>
 <footer id="foot"></footer>
 <script>
@@ -227,15 +233,30 @@ function vConsenso(){
     shown = shown.slice().sort((a,b) => {const x = f(a), y = f(b); return (x<y?-1:x>y?1:0)*d;});
   }
   const arrow = k => state.csort && state.csort.k === k ? (state.csort.d > 0 ? ' ▲' : ' ▼') : '';
-  const th = (k, label, cls='') => `<th class="sortable ${cls}" onclick="csort('${k}')" title="clique para ordenar">${label}${arrow(k)}</th>`;
+  const tips = {
+    papel: 'Papel (emissor e CUSIP)',
+    gestores: 'DETENTORES: quantos gestores tinham o papel ao FIM do trimestre — '
+            + 'inclui quem não movimentou nada. Não confundir com quem entrou.',
+    abriram: 'ABRIRAM: gestores que não tinham o papel e passaram a ter (novos entrantes).',
+    fecharam: 'FECHARAM: gestores que zeraram a posição.',
+    aumentaram: 'AUMENTARAM: já tinham o papel e ampliaram (>1% em ações).',
+    reduziram: 'REDUZIRAM: já tinham o papel e diminuíram (>1% em ações).',
+    bal: 'INTERESSE LÍQUIDO = (abriram + aumentaram) − (fecharam + reduziram). '
+       + 'Conta reforços de quem já era detentor, NÃO só entradas novas.',
+    valor: 'Valor somado das posições ABERTAS no trimestre (só novos entrantes).'};
+  const th = (k, label, cls='') => `<th class="sortable ${cls}" onclick="csort('${k}')" title="${tips[k]||'clique para ordenar'}">${label}${arrow(k)}</th>`;
   return `<div class="controls">
     <select onchange="state.tr=this.value;render()">${trs.map(t => `<option value="${t}" ${t===state.tr?'selected':''}>${trLabel(t)}</option>`).join('')}</select>
     <input type="text" placeholder="filtrar papel… (Enter)" value="${state.search}" onkeydown="if(event.key==='Enter'){state.search=this.value;render()}">
     <button class="chip" style="cursor:pointer" onclick="state.search=this.previousElementSibling.value;render()">Buscar</button>
     <span class="mut sm">${shown.length} papéis ${state.search?'' : '(com 2+ gestores movimentando; use a busca para ver todos)'}</span></div>
-  <table><thead><tr>${th('papel','Papel')}${th('gestores','Gestores','num')}${th('abriram','Abriram')}${th('fecharam','Fecharam')}${th('aumentaram','Aumentaram')}${th('reduziram','Reduziram')}${th('bal','Balanço','num')}${th('valor','Valor aberto','num')}</tr></thead><tbody>
+  <p class="mut sm" style="margin:-6px 0 12px">
+    <b>Detentores</b> = quem tinha o papel ao fim do trimestre (inclui quem ficou parado).
+    <b>Abriram</b> = novos entrantes. <b>Interesse líq.</b> = (abriram + aumentaram) − (fecharam + reduziram),
+    então um número alto pode ser só reforço de quem já era detentor, sem nenhum entrante.</p>
+  <table><thead><tr>${th('papel','Papel')}${th('gestores','Detentores','num')}${th('abriram','Abriram')}${th('fecharam','Fecharam')}${th('aumentaram','Aumentaram')}${th('reduziram','Reduziram')}${th('bal','Interesse líq.','num')}${th('valor','Valor aberto','num')}</tr></thead><tbody>
   ${shown.map(r => `<tr><td><b>${r.issuer}</b>${pcTag(r.put_call)}<div class="mut sm">${r.cusip}</div></td>
-    <td class="num" title="gestores com posição ao fim do trimestre"><b>${nHold(r) || '—'}</b><span class="mut sm">/${D.managers.length}</span></td>
+    <td class="num" title="detentores ao fim do trimestre (inclui quem não movimentou)"><b>${nHold(r) || '—'}</b><span class="mut sm">/${D.managers.length}</span></td>
     <td>${chips(r.opened,'g')||'<span class=mut>—</span>'}</td>
     <td>${chips(r.closed,'r')||'<span class=mut>—</span>'}</td>
     <td>${chips(r.increased,'gi')||'<span class=mut>—</span>'}</td>
@@ -423,18 +444,18 @@ function vSinal(){
   const statTable = `<div class="card" style="max-width:680px;margin-bottom:16px">
     <h3>Relação geral (${S.n_obs} casos papel-trimestre)</h3>
     <div class="controls" style="margin:6px 0 10px">
-      <label class="mut sm">faixa do balanço:&nbsp;</label>
+      <label class="mut sm">faixa do interesse líquido:&nbsp;</label>
       <select onchange="state.srange=+this.value;render()">
         ${[2,3,4,5].map(r => `<option value="${r}" ${range===r?'selected':''}>±${r}</option>`).join('')}
       </select>
       <span class="mut sm">extremos agregam ("ou mais/menos"); buckets largos ficam finos — leia o nº de casos.</span>
     </div>
-    <table><thead><tr><th>Balanço no trimestre</th><th class="num">Casos</th>
+    <table><thead><tr><th>Interesse líquido no trimestre</th><th class="num">Casos</th>
     <th class="num">Retorno médio no mesmo tri</th><th class="num">Retorno médio no tri seguinte</th></tr></thead><tbody>
     ${S.buckets.map(b => `<tr><td><span class="badge ${b.label.startsWith('+')?'pos':b.label.startsWith('-')?'neg':'zero'}">${b.label}</span></td>
       <td class="num">${b.n}</td><td class="num">${pct(b.same)}</td><td class="num">${pct(b.fwd)} <span class="mut sm">(${b.n_fwd})</span></td></tr>`).join('')}
     </tbody></table>
-    <div class="mut sm" style="margin-top:8px">correlação balanço × retorno: mesmo tri ${S.corr_same ?? '—'} · tri seguinte ${S.corr_fwd ?? '—'}</div>
+    <div class="mut sm" style="margin-top:8px">correlação interesse líquido × retorno: mesmo tri ${S.corr_same ?? '—'} · tri seguinte ${S.corr_fwd ?? '—'}</div>
   </div>`;
   const qy = state.psearch.trim().toLowerCase();
   let body = '';
@@ -453,7 +474,7 @@ function vSinal(){
       return `<div class="card" style="margin-bottom:14px;overflow-x:auto"><h3>${issuer} <span class="mut">${cusip}</span></h3>
       ${stockChart(cusip)}
       <table><thead><tr><th>Trimestre</th><th>Abriram</th><th>Fecharam</th><th>Aumentaram</th><th>Reduziram</th>
-      <th class="num">Balanço</th><th class="num">Retorno no tri</th><th class="num">Retorno tri seguinte</th></tr></thead><tbody>
+      <th class="num">Interesse líq.</th><th class="num">Retorno no tri</th><th class="num">Retorno tri seguinte</th></tr></thead><tbody>
       ${rows.map(({tr,r,ret,fwd}) => `<tr><td>${trLabel(tr)}</td>
         <td>${r?chips(r.opened,'g')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
         <td>${r?chips(r.closed,'r')||'<span class=mut>—</span>':'<span class=mut>—</span>'}</td>
@@ -478,6 +499,25 @@ function vSinal(){
 function render(){
   $('#main').innerHTML = {consenso: vConsenso, gestores: vGestores, gestor: vGestor, carteira: vCarteira, papel: vPapel, sinal: vSinal, radar: vRadar}[tab]();
 }
+// ---- faixa de cobertura: o quanto o trimestre mais recente já está completo
+(function(){
+  const el = $('#cover'), cov = (D.run||{}).coverage, last = D.periods[D.periods.length-1];
+  const parts = [`Dados gerados em <b>${D.generated}</b>`,
+                 `trimestre mais recente: <b>${q(last)}</b> (${last})`];
+  let warn = false;
+  if (cov && cov.n_managers){
+    const pct = Math.round(cov.with_data / cov.n_managers * 100);
+    parts.push(`cobertura: <b>${cov.with_data}/${cov.n_managers}</b> gestores (${pct}%)`);
+    warn = pct < 80;
+    if (cov.missing && cov.missing.length)
+      parts.push(`<span class="mut">sem filing: ${cov.missing.map(s => short[s]||s).join(', ')}</span>`);
+  }
+  const errs = ((D.run||{}).errors||[]).length;
+  if (errs){ parts.push(`<b>${errs} gestor(es) falharam na coleta</b>`); warn = true; }
+  el.className = warn ? 'warn' : '';
+  el.innerHTML = parts.join(' · ');
+})();
+
 $('#foot').innerHTML = `Gerado em ${D.generated} · ${D.managers.length} gestores · trimestres: ${D.periods.map(q).join(', ')} · ` + D.notes.join(' ') +
  ' Limitações: 13F cobre apenas posições long em ativos listados nos EUA, com defasagem de até 45 dias; não é recomendação de investimento.';
 render();

@@ -20,11 +20,18 @@ import json, re, csv, html, os, sys, time, urllib.request, urllib.parse
 from collections import defaultdict
 from datetime import date
 
-USER_AGENT = "Pedro Amorim pedrof.amorim@gmail.com (13F research)"
+USER_AGENT = os.environ.get(
+    "SEC_USER_AGENT", "Pedro Amorim pedrof.amorim@gmail.com (13F research)")
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
-N_QUARTERS = 8
+N_QUARTERS = 9
 RATE_SLEEP = 0.15
 INCLUDE_OPTIONS = False  # True para voltar a incluir puts/calls na análise
+# Prazo legal do 13F: 45 dias corridos após o fim do trimestre (Q2 -> 14/ago).
+# Um trimestre entra na janela alvo no PRÓPRIO dia do prazo. Antes esse valor
+# era 46, o que fazia a rodada do dia 14 ignorar o trimestre novo em silêncio.
+DEADLINE_DAYS = 45
+CIK_CACHE = os.path.join(DATA_DIR, "ciks.json")
+RUN_META = os.path.join(DATA_DIR, "meta", "_run.json")
 
 MANAGERS = {
     "berkshire":  ("Berkshire Hathaway (Warren Buffett)",        "0001067983"),
@@ -45,48 +52,56 @@ MANAGERS = {
     "gates":      ("Gates Foundation Trust",                     "0001166559"),
     "pabrai":     ("Dalal Street (Mohnish Pabrai)",              "0001549575"),
     "aquamarine": ("Aquamarine Zurich (Guy Spier)",              "0001953324"),
-    "fairholme":  ("Fairholme Capital (Bruce Berkowitz)",        None),
-    "altimeter":  ("Altimeter Capital (Brad Gerstner)",          None),
-    "akre":       ("Akre Capital (Chuck Akre)",                  None),
-    "starboard":  ("Starboard Value (Jeff Smith)",               None),
-    "sachem":     ("Sachem Head (Scott Ferguson)",               None),
-    "abrams":     ("Abrams Capital (David Abrams)",              None),
+    "fairholme":  ("Fairholme Capital (Bruce Berkowitz)",        "0001056831"),
+    "altimeter":  ("Altimeter Capital (Brad Gerstner)",          "0001541617"),
+    "akre":       ("Akre Capital (Chuck Akre)",                  "0001112520"),
+    "starboard":  ("Starboard Value (Jeff Smith)",               "0001517137"),
+    "sachem":     ("Sachem Head (Scott Ferguson)",               "0001582090"),
+    "abrams":     ("Abrams Capital (David Abrams)",              "0001358706"),
     "greenlight": ("Greenlight Capital (David Einhorn)",         "0001079114"),
-    "fundsmith":  ("Fundsmith (Terry Smith)",                     None),
-    "glenview":   ("Glenview Capital (Larry Robbins)",            None),
-    "corvex":     ("Corvex Management (Keith Meister)",           None),
-    "egerton":    ("Egerton Capital",                             None),
-    "ako":        ("AKO Capital",                                 None),
-    "semper":     ("Semper Augustus (Chris Bloomstran)",          None),
-    "giverny":    ("Giverny Capital (David Poppe)",               None),
-    "punchcard":  ("Punch Card Management (Norbert Lou)",         None),
-    "atreides":   ("Atreides Management (Gavin Baker)",           None),
-    "jericho":    ("Jericho Capital (Josh Resnick)",              None),
+    "fundsmith":  ("Fundsmith (Terry Smith)",                     "0001569205"),
+    "glenview":   ("Glenview Capital (Larry Robbins)",            "0001138995"),
+    "corvex":     ("Corvex Management (Keith Meister)",           "0001535472"),
+    "egerton":    ("Egerton Capital",                             "0001581811"),
+    "ako":        ("AKO Capital",                                 "0001376879"),
+    "semper":     ("Semper Augustus (Chris Bloomstran)",          "0001115373"),
+    # ATENÇÃO: os dados coletados sob "giverny" são da Giverny Capital Inc.
+    # (Montreal, François Rochon) — a única Giverny que arquiva 13F-HR. A
+    # Giverny Capital Asset Management LLC de David Poppe (CIK 0002035712)
+    # arquiva 13F-NT (notice, sem tabela de posições) e não é rastreável aqui.
+    "giverny":    ("Giverny Capital Inc. (François Rochon)",     "0001641864"),
+    "punchcard":  ("Punch Card Management (Norbert Lou)",         "0001631664"),
+    "atreides":   ("Atreides Management (Gavin Baker)",           "0001777813"),
+    "jericho":    ("Jericho Capital (Josh Resnick)",              "0001525234"),
     "longpond":   ("Long Pond Capital (John Khoury)",             "0001499066"),
-    "perceptive": ("Perceptive Advisors (Joseph Edelman)",        None),
-    "soroban":    ("Soroban Capital (Eric Mandelblatt)",          None),
-    "whalerock":  ("Whale Rock Capital (Alex Sacerdote)",         None),
+    "perceptive": ("Perceptive Advisors (Joseph Edelman)",        "0001224962"),
+    "soroban":    ("Soroban Capital (Eric Mandelblatt)",          "0001517857"),
+    "whalerock":  ("Whale Rock Capital (Alex Sacerdote)",         "0001387322"),
     # Gestores gigantes (centenas de posições): rode localmente para coletar
     "coatue":     ("Coatue Management (Philippe Laffont)",        "0001135730"),
     "viking":     ("Viking Global (Andreas Halvorsen)",           "0001103804"),
     "soros":      ("Soros Fund Management",                       "0001029160"),
     # "bridgewater": ("Bridgewater Associates (Ray Dalio)",      "0001350694"),  # milhares de posições
 }
+# Fallback: usado só se o CIK acima for None. Todos os 42 gestores já têm CIK
+# fixo, então isto hoje não é exercitado — mantido para gestores novos.
+# Razões sociais conferidas no EDGAR; nomes genéricos resolvem para a entidade
+# errada (ex.: "Giverny Capital" traz a Giverny Capital Inc., não a de Poppe).
 SEARCH_NAMES = {
     "fairholme": "Fairholme Capital Management",
     "altimeter": "Altimeter Capital Management",
     "akre": "Akre Capital Management",
     "starboard": "Starboard Value LP",
-    "sachem": "Sachem Head Capital Management",
+    "sachem": "Sachem Head Capital Management LP",
     "abrams": "Abrams Capital Management",
-    "fundsmith": "Fundsmith",
+    "fundsmith": "Fundsmith LLP",
     "glenview": "Glenview Capital Management",
     "corvex": "Corvex Management",
     "egerton": "Egerton Capital",
     "ako": "AKO Capital",
     "semper": "Semper Augustus",
-    "giverny": "Giverny Capital",
-    "punchcard": "Punch Card Management",
+    "giverny": "Giverny Capital Inc.",
+    "punchcard": "Punch Card Management L.P.",
     "atreides": "Atreides Management",
     "jericho": "Jericho Capital Asset Management",
     "perceptive": "Perceptive Advisors",
@@ -111,7 +126,8 @@ def target_periods(n=N_QUARTERS, today=None):
     today = today or date.today()
     q_end = {3: 31, 6: 30, 9: 30, 12: 31}
     cands = sorted(date(yy, mm, dd) for yy in (today.year, today.year - 1)
-                   for mm, dd in q_end.items() if (today - date(yy, mm, dd)).days >= 46)
+                   for mm, dd in q_end.items()
+                   if (today - date(yy, mm, dd)).days >= DEADLINE_DAYS)
     out, cur = [], cands[-1]
     for _ in range(n):
         out.append(cur.isoformat())
@@ -125,6 +141,19 @@ def resolve_cik(name):
     for h in js.get("hits", {}).get("hits", []):
         return h["_source"]["ciks"][0]
     raise LookupError(f"CIK não encontrado para {name}")
+
+def load_cik_cache():
+    """CIKs resolvidos em rodadas anteriores. Evita depender da busca
+    full-text do EDGAR a cada execução (lenta e sujeita a mudança)."""
+    try:
+        return json.load(open(CIK_CACHE, encoding="utf-8"))
+    except Exception:
+        return {}
+
+def save_cik_cache(cache):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(CIK_CACHE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, indent=1, sort_keys=True)
 
 def list_filings(cik, periods):
     best = {}
@@ -184,15 +213,23 @@ def parse_infotable(body):
 
 def cmd_fetch():
     periods = target_periods()
+    latest = periods[-1]
     print("Trimestres alvo:", ", ".join(periods))
+    print(f"Trimestre mais recente na janela: {latest}")
     os.makedirs(f"{DATA_DIR}/csv", exist_ok=True)
     os.makedirs(f"{DATA_DIR}/meta", exist_ok=True)
+    cik_cache = load_cik_cache()
+    errors, got_latest, no_latest = [], [], []
     for slug, (label, cik) in MANAGERS.items():
         try:
             if not cik:
-                cik = resolve_cik(SEARCH_NAMES[slug])
-                print(f"[{slug}] CIK resolvido: {cik}")
+                cik = cik_cache.get(slug) or resolve_cik(SEARCH_NAMES[slug])
+                if cik_cache.get(slug) != cik:
+                    cik_cache[slug] = cik
+                    save_cik_cache(cik_cache)
+                    print(f"[{slug}] CIK resolvido e cacheado: {cik}")
             filings = list_filings(cik, periods)
+            (got_latest if latest in filings else no_latest).append(slug)
             meta = {"slug": slug, "manager": label, "cik": cik, "filings": [],
                     "missing_periods": [p for p in periods if p not in filings]}
             for p in sorted(filings):
@@ -215,7 +252,33 @@ def cmd_fetch():
                 print(f"[{slug}] {p}: {len(rows)} posições ({form} {adsh})")
             json.dump(meta, open(f"{DATA_DIR}/meta/{slug}.json", "w"), indent=1)
         except Exception as e:
+            errors.append({"slug": slug, "manager": label,
+                           "error": f"{type(e).__name__}: {e}"})
             print(f"[{slug}] ERRO: {e}", file=sys.stderr)
+
+    total = len(MANAGERS)
+    run = {"fetched_at": date.today().isoformat(), "target_periods": periods,
+           "latest_period": latest, "n_managers": total,
+           "reported_latest": sorted(got_latest),
+           "missing_latest": sorted(no_latest),
+           "errors": errors}
+    json.dump(run, open(RUN_META, "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+
+    print("\n" + "=" * 62)
+    print(f"COBERTURA de {latest}: {len(got_latest)}/{total} gestores arquivaram")
+    if no_latest:
+        print(f"  sem filing do trimestre ({len(no_latest)}): "
+              + ", ".join(no_latest))
+    if errors:
+        print(f"  FALHAS ({len(errors)}):", file=sys.stderr)
+        for e in errors:
+            print(f"    {e['slug']}: {e['error']}", file=sys.stderr)
+    print("=" * 62)
+    # Sinaliza para o CI: nada novo do trimestre = não vale republicar.
+    if not got_latest:
+        print(f"AVISO: nenhum gestor arquivou {latest} ainda.", file=sys.stderr)
+    return len(got_latest), errors
 
 def load_holdings():
     hold = defaultdict(dict)
@@ -440,7 +503,21 @@ def cmd_analyze():
                             for v in sorted(hold[s][p].values(), key=lambda x: -x["value"])]
                         for p in hold[s]} for s in hold}
 
+    try:
+        run = json.load(open(RUN_META, encoding="utf-8"))
+    except Exception:
+        run = {}
+    # Cobertura recalculada a partir do que realmente entrou na análise —
+    # é isso que o dashboard mostra, não a intenção da coleta.
+    if periods:
+        holders_latest = sorted(s for s in hold if periods[-1] in hold[s])
+        run["coverage"] = {"period": periods[-1],
+                           "with_data": len(holders_latest),
+                           "n_managers": len(hold),
+                           "missing": sorted(set(hold) - set(holders_latest))}
+
     out = {"generated": date.today().isoformat(), "periods": periods,
+           "run": run,
            "managers": managers, "changes": changes, "consensus": consensus,
            "holdings": holdings_out, "performance": est_performance(hold),
            "stock_returns": {c: t for c, t in stock_returns_calc(hold)[0].items()},
@@ -453,6 +530,10 @@ def cmd_analyze():
         json.dump(out, f, ensure_ascii=False)
     print(f"analysis.json gerado: {len(managers)} gestores, {len(periods)} trimestres, "
           f"{sum(len(c) for c in changes.values())} transições")
+    cov = run.get("coverage")
+    if cov:
+        print(f"  cobertura de {cov['period']}: "
+              f"{cov['with_data']}/{cov['n_managers']} gestores com dados")
 
 def cmd_report():
     here = os.path.dirname(os.path.abspath(__file__))

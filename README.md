@@ -2,56 +2,105 @@
 
 Rastreador de carteiras de grandes gestores via SEC EDGAR: baixa os formulários
 13F-HR, compara as carteiras trimestre a trimestre e cruza os movimentos entre
-gestores (balanço de que papel entrou e saiu).
+gestores (quem entrou, saiu, aumentou e reduziu cada papel).
+
+Site: https://pedropeu14.github.io/13-Files/13f_dashboard.html
 
 ## Arquivos
 
 | Arquivo | O que é |
 |---|---|
 | `13f_search.py` | O programa (só Python 3, sem dependências). Comandos: `fetch`, `analyze`, `report`, `all`. |
-| `dashboard_template.html` | Template do dashboard (o script injeta os dados nele). |
-| `13f_dashboard.html` | Dashboard interativo pronto — abra no navegador. 4 abas: Consenso, Movimentos por gestor, Carteiras, Rastrear papel. |
+| `radar.py` | Radar de 13D/G, notícias e cartas — movimentos que aparecem ANTES dos 45 dias do 13F. Gera `radar.json`. |
+| `dashboard_template.html` | Template do dashboard (o script injeta os dados no lugar de `__DATA__`). |
+| `13f_dashboard.html` | Dashboard pronto — **arquivo gerado, não edite à mão**. 7 abas. |
 | `13F_analise.xlsx` | Planilha com 6 abas: Resumo, Consenso, Entradas e Saídas, Aumentos e Reduções, Carteiras, Notas. |
 | `make_excel.py` | Gera a planilha a partir de `data/analysis.json` (requer `pip install openpyxl`). |
-| `data/csv/` | Carteiras normalizadas (1 CSV por gestor/trimestre). |
-| `data/meta/` | Metadados dos filings (accession, datas, nº posições). |
-| `data/analysis.json` | Resultado da análise (mudanças + consenso + carteiras). |
+| `data/csv/` | Carteiras normalizadas (1 CSV por gestor/trimestre). Serve de cache: o `fetch` pula o que já existe. |
+| `data/meta/` | Metadados dos filings (accession, datas, nº posições) + `_run.json` com a cobertura da última rodada. |
+| `data/ciks.json` | Cache dos CIKs resolvidos por busca, para não depender do full-text search do EDGAR toda vez. |
+| `data/analysis.json` | Resultado da análise (mudanças + consenso + carteiras + cobertura). |
 
-## Como rodar (na sua máquina ou no Claude da empresa)
+## Atualização automática
+
+Dois workflows do GitHub Actions, ambos com `workflow_dispatch` (dá para rodar
+na mão pela aba Actions):
+
+| Workflow | Quando roda | O que atualiza |
+|---|---|---|
+| `.github/workflows/13f.yml` | diariamente do dia **14 ao 28** de fev/mai/ago/nov, + toda segunda-feira | carteiras, `13f_dashboard.html` e o cache em `data/` |
+| `.github/workflows/radar.yml` | 2× por dia útil | `radar.json` (13D/G, notícias, cartas) |
+
+A janela do dia 14 existe porque o prazo legal do 13F é de **45 dias corridos**
+após o fim do trimestre: 14/fev, 15/mai, 14/ago e 14/nov. A maioria dos grandes
+gestores arquiva no próprio dia do prazo, e as segundas-feiras fora da janela
+pegam emendas (`13F-HR/A`) e atrasados.
+
+Defina o secret `SEC_USER_AGENT` (formato `Nome Sobrenome email@dominio.com`) em
+Settings → Secrets → Actions. A SEC exige User-Agent identificável.
+
+Cada rodada escreve um resumo na aba Actions com quantos gestores arquivaram o
+trimestre e quais falharam.
+
+## Como rodar na mão
 
 ```bash
-python 13f_search.py all        # baixa da SEC + analisa + gera dashboard
+python 13f_search.py all        # baixa da SEC + analisa + gera o dashboard
 python make_excel.py            # regenera o Excel (opcional)
 ```
 
-Basta copiar esta pasta. Em outro Claude (Claude Code, Cowork, etc.), diga:
-"rode o 13f_search.py e me explique os resultados" — ou peça alterações.
-Edite `USER_AGENT` no topo do script com seu e-mail (exigência da SEC).
+O `fetch` usa `data/csv/` como cache — apagar um CSV força o redownload daquele
+gestor/trimestre. `SEC_USER_AGENT` no ambiente sobrescreve o `USER_AGENT` do
+script.
 
 ## Como adicionar/remover gestores
 
-Edite o dicionário `MANAGERS` no `13f_search.py`. Com o CIK
-(busque em https://www.sec.gov/cgi-bin/browse-edgar) ou com `None` + nome em
-`SEARCH_NAMES` para resolução automática. Gestores gigantes (Bridgewater,
-Coatue, Viking, Soros) já estão no arquivo, comentados — rodando localmente o
-script baixa qualquer tamanho de carteira.
+Edite o dicionário `MANAGERS` no `13f_search.py`. Com o CIK (busque em
+https://www.sec.gov/cgi-bin/browse-edgar) ou com `None` + o nome em
+`SEARCH_NAMES` para resolução automática — nesse caso o CIK resolvido é gravado
+em `data/ciks.json` e reaproveitado nas rodadas seguintes.
 
-## Estado atual dos dados (gerados em 2026-07-02)
+Todos os 42 gestores configurados hoje têm CIK fixo. Se for adicionar por nome,
+use a **razão social exata** do EDGAR: nome genérico resolve para a entidade
+errada silenciosamente. Confira também se a casa arquiva **13F-HR** e não
+**13F-NT** — o segundo é apenas um aviso de que as posições são reportadas por
+outro gestor, e não tem tabela de carteira para extrair.
 
-- 18 gestores, trimestres 2024-06-30 a 2026-03-31 (8 trimestres).
-- Coletados: Berkshire, Duquesne, Pershing Square, Baupost, Third Point,
-  Appaloosa, Tiger Global, Lone Pine, Scion, Icahn, ValueAct, Trian, TCI,
-  Elliott, Himalaya, Gates Foundation, Pabrai (Dalal Street), Aquamarine.
-- Pendentes (limite de sessão durante a coleta): Fairholme, Altimeter, Akre,
-  Starboard, Sachem Head, Abrams — já configurados no script; um
-  `python 13f_search.py all` completa tudo.
-- Duquesne não arquivou o 13F de 2026-03-31 até a geração; Scion (Burry) parou
-  de reportar após 2025-09-30; Greenlight (Einhorn) sem 13F desde 2023.
+Bridgewater segue comentado no arquivo (milhares de posições por filing).
+
+## Estado atual dos dados (coleta de 2026-08-07)
+
+- **41 gestores** com dados, 8 trimestres de 2024-06-30 a **2026-03-31**.
+- Cobertura do 1T26: 40/41. Só Scion (Burry) falta — parou de reportar após
+  2025-09-30.
+- Configurado mas sem dados: Greenlight (Einhorn não arquiva 13F desde 2023).
+- `giverny` = **Giverny Capital Inc. (François Rochon, Montreal)**, a única
+  Giverny que arquiva 13F-HR. A Giverny Capital Asset Management de David Poppe
+  arquiva 13F-NT e não tem carteira para extrair.
+- `N_QUARTERS = 9`: a partir da próxima coleta a janela guarda 9 trimestres, para
+  o trimestre novo não empurrar o mais antigo para fora.
+
+## Entendendo a aba Consenso
+
+As colunas medem coisas diferentes e são fáceis de confundir:
+
+- **Detentores** — quantos gestores tinham o papel ao **fim** do trimestre,
+  incluindo quem não mexeu em nada.
+- **Abriram** — quem não tinha e passou a ter. **São os novos entrantes.**
+- **Interesse líq.** — `(abriram + aumentaram) − (fecharam + reduziram)`.
+  Um número alto aqui pode ser apenas reforço de quem já era detentor, **sem
+  nenhum entrante novo**. Para ver entrantes, olhe a coluna Abriram.
+
+Exemplo real (1T26, Uber): Detentores 6, Abriram nenhum, Aumentaram 4,
+Interesse líquido +4 — quatro gestores ampliaram posição, zero entraram.
 
 ## Limitações do 13F
 
-Somente posições **long** em papéis listados nos EUA (ações, ADRs, opções);
-não mostra shorts, bonds nem posições fora dos EUA. Publicado até 45 dias após
-o fim do trimestre — as posições podem já ter mudado. Filings com valores em
-milhares de USD (alguns filers antigos) são normalizados automaticamente.
+Somente posições **long** em papéis listados nos EUA (ações, ADRs, opções); não
+mostra shorts, bonds nem posições fora dos EUA. Publicado até 45 dias após o fim
+do trimestre — as posições podem já ter mudado. Pedidos de tratamento
+confidencial podem atrasar a divulgação de posições específicas por meses.
+Filings com valores em milhares de USD são normalizados automaticamente.
+Opções (puts/calls) estão **excluídas** da análise (`INCLUDE_OPTIONS = False`).
+
 Não é recomendação de investimento.
