@@ -2,12 +2,18 @@ name: Atualizar 13F (carteiras + dashboard)
 
 on:
   schedule:
-    # Prazo do 13F: 45 dias após o fim do trimestre — 14/fev, 15/mai, 14/ago, 14/nov.
-    # Roda diariamente do dia 14 ao 28 nos meses de divulgação, para pegar os
-    # filings conforme eles chegam (a maioria sai no próprio dia do prazo).
-    - cron: "0 12 14-28 2,5,8,11 *"
-    # Fora da janela, uma vez por semana — pega emendas (13F-HR/A) e atrasados.
-    - cron: "0 12 * * 1"
+    # Só duas rodadas por trimestre, nos meses de divulgação (fev/mai/ago/nov).
+    # Horários em UTC; a SEC recebe filings no horário de Nova York.
+    #
+    # Dia 14, 21:00 UTC = 23h em Zurique = 17h em NY — depois do fechamento,
+    # quando a maioria dos grandes gestores já arquivou no dia do prazo.
+    - cron: "0 21 14 2,5,8,11 *"
+    # Dia 15, 13:00 UTC = 15h em Zurique = 9h em NY — pega quem arquivou tarde
+    # da noite do dia 14.
+    - cron: "0 13 15 2,5,8,11 *"
+    #
+    # Ambos ficam a 1h+ do radar.yml (11:00 e 22:00 UTC) para os dois não
+    # tentarem dar push ao mesmo tempo.
   workflow_dispatch:
 
 permissions:
