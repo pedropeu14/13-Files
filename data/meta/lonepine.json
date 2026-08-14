@@ -66,6 +66,15 @@
    "file_date": "2026-05-15",
    "n_positions": 36,
    "status": "CACHED"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-005485",
+   "file_date": "2026-08-14",
+   "n_positions": 34,
+   "total_value_usd": 16357760275,
+   "status": "OK"
   }
  ],
  "missing_periods": []

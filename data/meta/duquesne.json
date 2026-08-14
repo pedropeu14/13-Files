@@ -65,7 +65,15 @@
    "adsh": "0001536411-26-000004",
    "file_date": "2026-05-15",
    "n_positions": 70,
-   "total_value_usd": 3376828,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001536411-26-000006",
+   "file_date": "2026-08-14",
+   "n_positions": 95,
+   "total_value_usd": 5210856,
    "status": "OK"
   }
  ],

@@ -1,16 +1,81 @@
 {
  "slug": "fundsmith",
  "manager": "Fundsmith (Terry Smith)",
- "cik": "0001520023",
- "filings": [],
- "missing_periods": [
-  "2024-06-30",
-  "2024-09-30",
-  "2024-12-31",
-  "2025-03-31",
-  "2025-06-30",
-  "2025-09-30",
-  "2025-12-31",
-  "2026-03-31"
- ]
+ "cik": "0001569205",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001520023-24-000030",
+   "file_date": "2024-08-14",
+   "n_positions": 40,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001520023-24-000040",
+   "file_date": "2024-11-14",
+   "n_positions": 40,
+   "status": "CACHED"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001520023-25-000002",
+   "file_date": "2025-02-14",
+   "n_positions": 38,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001520023-25-000003",
+   "file_date": "2025-05-15",
+   "n_positions": 38,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001801547-25-000008",
+   "file_date": "2025-08-14",
+   "n_positions": 39,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001569205-25-000004",
+   "file_date": "2025-11-14",
+   "n_positions": 35,
+   "status": "CACHED"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001569205-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 37,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001569205-26-000005",
+   "file_date": "2026-05-15",
+   "n_positions": 34,
+   "status": "CACHED"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001569205-26-000012",
+   "file_date": "2026-08-14",
+   "n_positions": 41,
+   "total_value_usd": 13648923682,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
 }

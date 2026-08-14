@@ -68,5 +68,7 @@
    "status": "CACHED"
   }
  ],
- "missing_periods": []
+ "missing_periods": [
+  "2026-06-30"
+ ]
 }

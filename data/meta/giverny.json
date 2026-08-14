@@ -1,6 +1,6 @@
 {
  "slug": "giverny",
- "manager": "Giverny Capital (David Poppe)",
+ "manager": "Giverny Capital Inc. (Fran\u00e7ois Rochon)",
  "cik": "0001641864",
  "filings": [
   {
@@ -66,6 +66,15 @@
    "file_date": "2026-05-15",
    "n_positions": 51,
    "status": "CACHED"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001641864-26-000005",
+   "file_date": "2026-08-14",
+   "n_positions": 51,
+   "total_value_usd": 2974321189,
+   "status": "OK"
   }
  ],
  "missing_periods": []
