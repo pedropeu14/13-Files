@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-08-14",
+ "fetched_at": "2026-08-15",
  "target_periods": [
   "2024-06-30",
   "2024-09-30",
@@ -47,6 +47,7 @@
   "soros",
   "starboard",
   "tci",
+  "thirdpoint",
   "tigerglobal",
   "trian",
   "valueact",
@@ -56,8 +57,7 @@
  "missing_latest": [
   "greenlight",
   "pershing",
-  "scion",
-  "thirdpoint"
+  "scion"
  ],
  "errors": []
 }
