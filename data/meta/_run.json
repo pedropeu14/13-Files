@@ -33,6 +33,7 @@
   "gates",
   "giverny",
   "glenview",
+  "greenlight",
   "himalaya",
   "icahn",
   "jericho",
@@ -56,7 +57,6 @@
   "whalerock"
  ],
  "missing_latest": [
-  "greenlight",
   "pershing",
   "scion"
  ],

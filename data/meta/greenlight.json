@@ -1,17 +1,89 @@
 {
  "slug": "greenlight",
- "manager": "Greenlight Capital (David Einhorn)",
- "cik": "0001079114",
- "filings": [],
- "missing_periods": [
-  "2024-06-30",
-  "2024-09-30",
-  "2024-12-31",
-  "2025-03-31",
-  "2025-06-30",
-  "2025-09-30",
-  "2025-12-31",
-  "2026-03-31",
-  "2026-06-30"
- ]
+ "manager": "Greenlight / DME Capital (David Einhorn)",
+ "cik": "0001489933",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-003549",
+   "file_date": "2024-08-14",
+   "n_positions": 81,
+   "total_value_usd": 2044406325,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-005240",
+   "file_date": "2024-11-14",
+   "n_positions": 79,
+   "total_value_usd": 2402923277,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-001165",
+   "file_date": "2025-02-14",
+   "n_positions": 74,
+   "total_value_usd": 1944130830,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-002307",
+   "file_date": "2025-05-15",
+   "n_positions": 68,
+   "total_value_usd": 1974394246,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-003351",
+   "file_date": "2025-08-14",
+   "n_positions": 69,
+   "total_value_usd": 2325916748,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-005032",
+   "file_date": "2025-11-14",
+   "n_positions": 72,
+   "total_value_usd": 2541714523,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-001122",
+   "file_date": "2026-02-17",
+   "n_positions": 84,
+   "total_value_usd": 2849309979,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-002341",
+   "file_date": "2026-05-15",
+   "n_positions": 92,
+   "total_value_usd": 3190735190,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-003786",
+   "file_date": "2026-08-14",
+   "n_positions": 95,
+   "total_value_usd": 3908853490,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
 }

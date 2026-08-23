@@ -9,8 +9,7 @@
    "adsh": "0001855205-24-000038",
    "file_date": "2024-08-14",
    "n_positions": 11,
-   "total_value_usd": 2332874602,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2024-09-30",
@@ -18,8 +17,7 @@
    "adsh": "0001855205-24-000059",
    "file_date": "2024-11-14",
    "n_positions": 6,
-   "total_value_usd": 2390250898,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2024-12-31",
@@ -27,8 +25,7 @@
    "adsh": "0001855205-25-000017",
    "file_date": "2025-02-14",
    "n_positions": 12,
-   "total_value_usd": 2460190054,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2025-03-31",
@@ -36,8 +33,7 @@
    "adsh": "0001855205-25-000032",
    "file_date": "2025-05-15",
    "n_positions": 7,
-   "total_value_usd": 1957965218,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2025-06-30",
@@ -45,8 +41,7 @@
    "adsh": "0001855205-25-000058",
    "file_date": "2025-08-14",
    "n_positions": 11,
-   "total_value_usd": 3119609039,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2025-09-30",
@@ -54,8 +49,7 @@
    "adsh": "0001050464-25-000005",
    "file_date": "2025-11-14",
    "n_positions": 12,
-   "total_value_usd": 3616243676,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2025-12-31",
@@ -63,8 +57,7 @@
    "adsh": "0001050464-26-000002",
    "file_date": "2026-02-17",
    "n_positions": 15,
-   "total_value_usd": 4208021192,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2026-03-31",
@@ -72,8 +65,7 @@
    "adsh": "0001050464-26-000004",
    "file_date": "2026-05-15",
    "n_positions": 9,
-   "total_value_usd": 5780731888,
-   "status": "OK"
+   "status": "CACHED"
   },
   {
    "period": "2026-06-30",
@@ -81,8 +73,7 @@
    "adsh": "0001050464-26-000005",
    "file_date": "2026-08-14",
    "n_positions": 8,
-   "total_value_usd": 8044808334,
-   "status": "OK"
+   "status": "CACHED"
   }
  ],
  "missing_periods": []
