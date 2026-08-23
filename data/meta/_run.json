@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-08-15",
+ "fetched_at": "2026-08-23",
  "target_periods": [
   "2024-06-30",
   "2024-09-30",
@@ -12,7 +12,7 @@
   "2026-06-30"
  ],
  "latest_period": "2026-06-30",
- "n_managers": 42,
+ "n_managers": 43,
  "reported_latest": [
   "abrams",
   "ako",
@@ -39,6 +39,7 @@
   "lonepine",
   "longpond",
   "pabrai",
+  "peconic",
   "perceptive",
   "punchcard",
   "sachem",
