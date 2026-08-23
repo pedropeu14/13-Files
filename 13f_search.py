@@ -59,10 +59,11 @@ MANAGERS = {
     "sachem":     ("Sachem Head (Scott Ferguson)",               "0001582090"),
     "abrams":     ("Abrams Capital (David Abrams)",              "0001358706"),
     "peconic":    ("Peconic Partners (Bill Harnisch)",           "0001050464"),
-    # Greenlight arquivou 13F-HR até o 3T/4T de 2023 e parou. Como a janela de
-    # análise começa depois disso, ela nunca traz posições — fica configurada
-    # para o caso de Einhorn voltar a reportar.
-    "greenlight": ("Greenlight Capital (David Einhorn)",         "0001079114"),
+    # Einhorn NÃO parou de arquivar — o filer mudou. A Greenlight Capital Inc
+    # (CIK 0001079114) parou de reportar 13F-HR em 2023; quem entrega as
+    # posições hoje é a DME Capital Management, LP (CIK 0001489933). A DME
+    # Advisors, LP (CIK 0001300763) só arquiva 13F-NT (notice, sem carteira).
+    "greenlight": ("Greenlight / DME Capital (David Einhorn)",   "0001489933"),
     "fundsmith":  ("Fundsmith (Terry Smith)",                     "0001569205"),
     "glenview":   ("Glenview Capital (Larry Robbins)",            "0001138995"),
     "corvex":     ("Corvex Management (Keith Meister)",           "0001535472"),

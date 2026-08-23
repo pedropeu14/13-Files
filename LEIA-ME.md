@@ -79,11 +79,12 @@ Bridgewater segue comentado no arquivo (milhares de posições por filing).
 - **43 gestores configurados** no `MANAGERS`.
 - **Peconic Partners (Bill Harnisch)**, CIK `0001050464`, entra na próxima
   rodada — arquiva 13F-HR todo trimestre, então cobre a janela inteira.
-- **Greenlight (David Einhorn)** está configurado com o CIK correto
-  (`0001079114`), mas **não produz dados**: o último 13F-HR dele é de 2023 e a
-  janela de análise começa em 2024. Fica no arquivo para o caso de ele voltar a
-  reportar. Confirmado em `data/meta/greenlight.json`: 8 trimestres, zero
-  filings.
+- **Greenlight (David Einhorn)** aponta para a **DME Capital Management, LP**
+  (CIK `0001489933`), que é quem arquiva o 13F-HR do grupo desde 2023. A
+  Greenlight Capital Inc (CIK `0001079114`) parou de reportar posições naquele
+  ano e hoje só arquiva notices; a DME Advisors, LP (CIK `0001300763`) arquiva
+  apenas 13F-NT. Usar o CIK da Greenlight Capital Inc devolve zero posições —
+  foi o que aconteceu até 23/08/2026.
 - `giverny` = **Giverny Capital Inc. (François Rochon, Montreal)**, a única
   Giverny que arquiva 13F-HR. A Giverny Capital Asset Management de David Poppe
   arquiva 13F-NT e não tem carteira para extrair.
