@@ -28,13 +28,16 @@ na mão pela aba Actions):
 
 | Workflow | Quando roda | O que atualiza |
 |---|---|---|
-| `.github/workflows/13f.yml` | diariamente do dia **14 ao 28** de fev/mai/ago/nov, + toda segunda-feira | carteiras, `13f_dashboard.html` e o cache em `data/` |
+| `.github/workflows/13f.yml` | **dia 14 às 21:00 UTC** e **dia 15 às 13:00 UTC** de fev/mai/ago/nov | carteiras, `13f_dashboard.html`, `13F_analise.xlsx` e o cache em `data/` |
 | `.github/workflows/radar.yml` | 2× por dia útil | `radar.json` (13D/G, notícias, cartas) |
 
-A janela do dia 14 existe porque o prazo legal do 13F é de **45 dias corridos**
-após o fim do trimestre: 14/fev, 15/mai, 14/ago e 14/nov. A maioria dos grandes
-gestores arquiva no próprio dia do prazo, e as segundas-feiras fora da janela
-pegam emendas (`13F-HR/A`) e atrasados.
+Os dois horários existem porque o prazo legal do 13F é de **45 dias corridos**
+após o fim do trimestre (14/fev, 15/mai, 14/ago, 14/nov) e a maioria dos grandes
+gestores arquiva no próprio dia, ao longo do dia útil de Nova York. A rodada do
+dia 14 é às 17h em NY, depois do fechamento; a do dia 15 é às 9h em NY, para
+pegar quem entregou tarde da noite. Fora desses dois dias o workflow não roda —
+use **Run workflow** na aba Actions quando precisar (por exemplo, para pegar
+emendas `13F-HR/A` semanas depois).
 
 Defina o secret `SEC_USER_AGENT` (formato `Nome Sobrenome email@dominio.com`) em
 Settings → Secrets → Actions. A SEC exige User-Agent identificável.
@@ -73,7 +76,14 @@ Bridgewater segue comentado no arquivo (milhares de posições por filing).
 - **41 gestores** com dados, 8 trimestres de 2024-06-30 a **2026-03-31**.
 - Cobertura do 1T26: 40/41. Só Scion (Burry) falta — parou de reportar após
   2025-09-30.
-- Configurado mas sem dados: Greenlight (Einhorn não arquiva 13F desde 2023).
+- **43 gestores configurados** no `MANAGERS`.
+- **Peconic Partners (Bill Harnisch)**, CIK `0001050464`, entra na próxima
+  rodada — arquiva 13F-HR todo trimestre, então cobre a janela inteira.
+- **Greenlight (David Einhorn)** está configurado com o CIK correto
+  (`0001079114`), mas **não produz dados**: o último 13F-HR dele é de 2023 e a
+  janela de análise começa em 2024. Fica no arquivo para o caso de ele voltar a
+  reportar. Confirmado em `data/meta/greenlight.json`: 8 trimestres, zero
+  filings.
 - `giverny` = **Giverny Capital Inc. (François Rochon, Montreal)**, a única
   Giverny que arquiva 13F-HR. A Giverny Capital Asset Management de David Poppe
   arquiva 13F-NT e não tem carteira para extrair.
