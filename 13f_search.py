@@ -207,7 +207,15 @@ def fetch_infotable(cik, adsh):
     xmls = [i["name"] for i in idx["directory"]["item"]
             if i["name"].lower().endswith(".xml") and "primary_doc" not in i["name"].lower()]
     name = xmls[0] if xmls else "primary_doc.xml"
-    return get(f"{base}/{name}")
+    body = get(f"{base}/{name}")
+    # Alguns filings nao expoem a INFORMATION TABLE como arquivo proprio no
+    # index.json -- sobra so o primary_doc, que traz o cabecalho e nenhuma
+    # posicao. A tabela esta na submissao completa .txt. Sem este fallback o
+    # trimestre entra como carteira vazia e o trimestre seguinte aparece como
+    # um monte de aberturas falsas no consenso (caso real: Thrive, 2024-06-30).
+    if not T_INFO.search(body):
+        body = get(f"{base}/{adsh}.txt")
+    return body
 
 def parse_infotable(body):
     ps = {k: TAGP(k) for k in ["nameOfIssuer", "titleOfClass", "cusip", "value",
