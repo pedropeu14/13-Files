@@ -1,0 +1,89 @@
+{
+ "slug": "greenoaks",
+ "manager": "Greenoaks Capital Partners",
+ "cik": "0001840735",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000902664-24-005136",
+   "file_date": "2024-08-14",
+   "n_positions": 15,
+   "total_value_usd": 1485024607,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001840735-24-000003",
+   "file_date": "2024-11-14",
+   "n_positions": 12,
+   "total_value_usd": 1862217730,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001840735-25-000007",
+   "file_date": "2025-02-14",
+   "n_positions": 9,
+   "total_value_usd": 1840546807,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001840735-25-000012",
+   "file_date": "2025-05-15",
+   "n_positions": 7,
+   "total_value_usd": 1806630905,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001840735-25-000017",
+   "file_date": "2025-08-14",
+   "n_positions": 7,
+   "total_value_usd": 2663678010,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001840735-25-000021",
+   "file_date": "2025-11-14",
+   "n_positions": 8,
+   "total_value_usd": 3065911735,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001840735-26-000003",
+   "file_date": "2026-02-17",
+   "n_positions": 10,
+   "total_value_usd": 2981111830,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001840735-26-000011",
+   "file_date": "2026-05-15",
+   "n_positions": 10,
+   "total_value_usd": 2296661853,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001840735-26-000028",
+   "file_date": "2026-08-14",
+   "n_positions": 10,
+   "total_value_usd": 2356875969,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

@@ -1,0 +1,89 @@
+{
+ "slug": "ardsley",
+ "manager": "Ardsley Advisory Partners (Phil Hempleman)",
+ "cik": "0000900529",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-003400",
+   "file_date": "2024-08-14",
+   "n_positions": 140,
+   "total_value_usd": 680786676,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-004816",
+   "file_date": "2024-11-14",
+   "n_positions": 128,
+   "total_value_usd": 607958225,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-000980",
+   "file_date": "2025-02-14",
+   "n_positions": 143,
+   "total_value_usd": 630632386,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-002033",
+   "file_date": "2025-05-15",
+   "n_positions": 139,
+   "total_value_usd": 522424113,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-003308",
+   "file_date": "2025-08-14",
+   "n_positions": 145,
+   "total_value_usd": 760623476,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-004897",
+   "file_date": "2025-11-14",
+   "n_positions": 130,
+   "total_value_usd": 808664987,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-000864",
+   "file_date": "2026-02-17",
+   "n_positions": 142,
+   "total_value_usd": 911130100,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-002039",
+   "file_date": "2026-05-15",
+   "n_positions": 151,
+   "total_value_usd": 784359571,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-002590",
+   "file_date": "2026-07-13",
+   "n_positions": 145,
+   "total_value_usd": 960211633,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

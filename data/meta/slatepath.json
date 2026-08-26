@@ -1,0 +1,89 @@
+{
+ "slug": "slatepath",
+ "manager": "Slate Path Capital (David Greenspan)",
+ "cik": "0001559706",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-003490",
+   "file_date": "2024-08-14",
+   "n_positions": 62,
+   "total_value_usd": 5253057754,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-24-004978",
+   "file_date": "2024-11-14",
+   "n_positions": 68,
+   "total_value_usd": 6493470428,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-000960",
+   "file_date": "2025-02-14",
+   "n_positions": 51,
+   "total_value_usd": 5531473968,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-002091",
+   "file_date": "2025-05-15",
+   "n_positions": 50,
+   "total_value_usd": 5536957585,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-003338",
+   "file_date": "2025-08-14",
+   "n_positions": 43,
+   "total_value_usd": 5800170883,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-25-004945",
+   "file_date": "2025-11-14",
+   "n_positions": 51,
+   "total_value_usd": 6463165358,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-000952",
+   "file_date": "2026-02-17",
+   "n_positions": 51,
+   "total_value_usd": 7414402748,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-002095",
+   "file_date": "2026-05-15",
+   "n_positions": 44,
+   "total_value_usd": 6733785575,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001172661-26-003448",
+   "file_date": "2026-08-14",
+   "n_positions": 40,
+   "total_value_usd": 7224088306,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

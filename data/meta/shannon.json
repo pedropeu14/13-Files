@@ -1,0 +1,89 @@
+{
+ "slug": "shannon",
+ "manager": "Shannon River Fund Mgmt (Spencer Waxman)",
+ "cik": "0001301050",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-24-000640",
+   "file_date": "2024-08-13",
+   "n_positions": 22,
+   "total_value_usd": 620474064,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-24-000941",
+   "file_date": "2024-11-13",
+   "n_positions": 19,
+   "total_value_usd": 714723298,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-000260",
+   "file_date": "2025-02-13",
+   "n_positions": 19,
+   "total_value_usd": 677643703,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-000645",
+   "file_date": "2025-05-14",
+   "n_positions": 14,
+   "total_value_usd": 383228663,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-000992",
+   "file_date": "2025-08-13",
+   "n_positions": 24,
+   "total_value_usd": 751966021,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-25-001398",
+   "file_date": "2025-11-13",
+   "n_positions": 20,
+   "total_value_usd": 621171518,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-26-000239",
+   "file_date": "2026-02-17",
+   "n_positions": 26,
+   "total_value_usd": 637506153,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001013594-26-000581",
+   "file_date": "2026-05-14",
+   "n_positions": 28,
+   "total_value_usd": 524080072,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001013594-26-000886",
+   "file_date": "2026-08-13",
+   "n_positions": 37,
+   "total_value_usd": 1120393801,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

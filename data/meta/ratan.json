@@ -1,0 +1,89 @@
+{
+ "slug": "ratan",
+ "manager": "Ratan Capital Management (Nehal Chopra)",
+ "cik": "0001566887",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001566887-24-000007",
+   "file_date": "2024-08-14",
+   "n_positions": 39,
+   "total_value_usd": 330329605,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001566887-24-000008",
+   "file_date": "2024-11-14",
+   "n_positions": 35,
+   "total_value_usd": 371030271,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001566887-25-000003",
+   "file_date": "2025-02-14",
+   "n_positions": 39,
+   "total_value_usd": 651981022,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001566887-25-000004",
+   "file_date": "2025-05-14",
+   "n_positions": 32,
+   "total_value_usd": 309958087,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001566887-25-000005",
+   "file_date": "2025-08-14",
+   "n_positions": 33,
+   "total_value_usd": 218368382,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001566887-25-000008",
+   "file_date": "2025-11-14",
+   "n_positions": 30,
+   "total_value_usd": 185284528,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001566887-26-000002",
+   "file_date": "2026-02-12",
+   "n_positions": 39,
+   "total_value_usd": 363533111,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001566887-26-000003",
+   "file_date": "2026-05-14",
+   "n_positions": 37,
+   "total_value_usd": 269374901,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001566887-26-000004",
+   "file_date": "2026-08-18",
+   "n_positions": 48,
+   "total_value_usd": 309839514,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

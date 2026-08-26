@@ -1,0 +1,89 @@
+{
+ "slug": "redwood",
+ "manager": "Redwood Capital Mgmt (Jonathan Kolatch)",
+ "cik": "0001316622",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-24-004617",
+   "file_date": "2024-08-14",
+   "n_positions": 17,
+   "total_value_usd": 650446245,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-24-006573",
+   "file_date": "2024-11-14",
+   "n_positions": 15,
+   "total_value_usd": 656569513,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0000919574-25-001382",
+   "file_date": "2025-02-14",
+   "n_positions": 12,
+   "total_value_usd": 603214621,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0000919574-25-003159",
+   "file_date": "2025-05-15",
+   "n_positions": 13,
+   "total_value_usd": 669874617,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-25-004749",
+   "file_date": "2025-08-14",
+   "n_positions": 11,
+   "total_value_usd": 550592886,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-25-006883",
+   "file_date": "2025-11-14",
+   "n_positions": 17,
+   "total_value_usd": 1032198699,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-001171",
+   "file_date": "2026-02-17",
+   "n_positions": 17,
+   "total_value_usd": 934196020,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-003316",
+   "file_date": "2026-05-15",
+   "n_positions": 22,
+   "total_value_usd": 674204438,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-005278",
+   "file_date": "2026-08-14",
+   "n_positions": 25,
+   "total_value_usd": 927442105,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

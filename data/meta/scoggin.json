@@ -1,0 +1,89 @@
+{
+ "slug": "scoggin",
+ "manager": "Scoggin Management (Craig Effron)",
+ "cik": "0001086416",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001193805-24-001035",
+   "file_date": "2024-08-14",
+   "n_positions": 60,
+   "total_value_usd": 300957888,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001193805-24-001373",
+   "file_date": "2024-11-14",
+   "n_positions": 78,
+   "total_value_usd": 420038577,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001731593-25-000004",
+   "file_date": "2025-02-14",
+   "n_positions": 63,
+   "total_value_usd": 493045653,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001086416-25-000009",
+   "file_date": "2025-05-15",
+   "n_positions": 58,
+   "total_value_usd": 358871845,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001086416-25-000011",
+   "file_date": "2025-08-14",
+   "n_positions": 68,
+   "total_value_usd": 480957842,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0002060757-25-000006",
+   "file_date": "2025-11-13",
+   "n_positions": 62,
+   "total_value_usd": 638971973,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0002060757-26-000005",
+   "file_date": "2026-02-17",
+   "n_positions": 60,
+   "total_value_usd": 651931450,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0002060757-26-000030",
+   "file_date": "2026-05-15",
+   "n_positions": 51,
+   "total_value_usd": 1038055388,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0002060757-26-000048",
+   "file_date": "2026-08-14",
+   "n_positions": 69,
+   "total_value_usd": 934782444,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

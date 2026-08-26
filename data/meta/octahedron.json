@@ -1,0 +1,89 @@
+{
+ "slug": "octahedron",
+ "manager": "Octahedron Capital Management",
+ "cik": "0001891904",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001891904-24-000004",
+   "file_date": "2024-08-13",
+   "n_positions": 19,
+   "total_value_usd": 99670879,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001891904-24-000007",
+   "file_date": "2024-11-13",
+   "n_positions": 17,
+   "total_value_usd": 89948403,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001891904-25-000003",
+   "file_date": "2025-02-11",
+   "n_positions": 20,
+   "total_value_usd": 105339040,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001891904-25-000004",
+   "file_date": "2025-05-15",
+   "n_positions": 19,
+   "total_value_usd": 114908598,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001891904-25-000007",
+   "file_date": "2025-08-11",
+   "n_positions": 22,
+   "total_value_usd": 132458722,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001891904-25-000011",
+   "file_date": "2025-11-12",
+   "n_positions": 23,
+   "total_value_usd": 175939809,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001891904-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 16,
+   "total_value_usd": 146963561,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001891904-26-000003",
+   "file_date": "2026-05-15",
+   "n_positions": 18,
+   "total_value_usd": 137522739,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001891904-26-000004",
+   "file_date": "2026-08-14",
+   "n_positions": 15,
+   "total_value_usd": 195347070,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

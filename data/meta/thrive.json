@@ -1,0 +1,89 @@
+{
+ "slug": "thrive",
+ "manager": "Thrive Capital (Josh Kushner)",
+ "cik": "0001845943",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001845943-24-000003",
+   "file_date": "2024-08-09",
+   "n_positions": 0,
+   "total_value_usd": 0,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001845943-24-000005",
+   "file_date": "2024-11-13",
+   "n_positions": 177,
+   "total_value_usd": 212280149,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001845943-25-000001",
+   "file_date": "2025-02-13",
+   "n_positions": 96,
+   "total_value_usd": 218178433,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001845943-25-000002",
+   "file_date": "2025-04-30",
+   "n_positions": 114,
+   "total_value_usd": 167392376,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001986042-25-000011",
+   "file_date": "2025-08-08",
+   "n_positions": 169,
+   "total_value_usd": 319265975,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001845943-25-000004",
+   "file_date": "2025-10-28",
+   "n_positions": 171,
+   "total_value_usd": 387656211,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001845943-26-000001",
+   "file_date": "2026-02-09",
+   "n_positions": 174,
+   "total_value_usd": 448985947,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001845943-26-000002",
+   "file_date": "2026-04-27",
+   "n_positions": 169,
+   "total_value_usd": 456284244,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001845943-26-000003",
+   "file_date": "2026-08-05",
+   "n_positions": 170,
+   "total_value_usd": 530463461,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}

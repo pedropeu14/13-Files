@@ -1,0 +1,89 @@
+{
+ "slug": "cas",
+ "manager": "CAS Investment Partners (Clifford Sosin)",
+ "cik": "0001697591",
+ "filings": [
+  {
+   "period": "2024-06-30",
+   "form": "13F-HR",
+   "adsh": "0001420506-24-001459",
+   "file_date": "2024-08-14",
+   "n_positions": 5,
+   "total_value_usd": 1280469555,
+   "status": "OK"
+  },
+  {
+   "period": "2024-09-30",
+   "form": "13F-HR",
+   "adsh": "0001420506-24-002470",
+   "file_date": "2024-11-14",
+   "n_positions": 5,
+   "total_value_usd": 1507796267,
+   "status": "OK"
+  },
+  {
+   "period": "2024-12-31",
+   "form": "13F-HR",
+   "adsh": "0001420506-25-000470",
+   "file_date": "2025-02-14",
+   "n_positions": 4,
+   "total_value_usd": 1717289539,
+   "status": "OK"
+  },
+  {
+   "period": "2025-03-31",
+   "form": "13F-HR",
+   "adsh": "0001420506-25-001269",
+   "file_date": "2025-05-15",
+   "n_positions": 4,
+   "total_value_usd": 1539879334,
+   "status": "OK"
+  },
+  {
+   "period": "2025-06-30",
+   "form": "13F-HR",
+   "adsh": "0001420506-25-002046",
+   "file_date": "2025-08-14",
+   "n_positions": 4,
+   "total_value_usd": 2052289976,
+   "status": "OK"
+  },
+  {
+   "period": "2025-09-30",
+   "form": "13F-HR",
+   "adsh": "0001420506-25-003281",
+   "file_date": "2025-11-14",
+   "n_positions": 5,
+   "total_value_usd": 2242253811,
+   "status": "OK"
+  },
+  {
+   "period": "2025-12-31",
+   "form": "13F-HR",
+   "adsh": "0001697591-26-000002",
+   "file_date": "2026-02-17",
+   "n_positions": 5,
+   "total_value_usd": 2337079892,
+   "status": "OK"
+  },
+  {
+   "period": "2026-03-31",
+   "form": "13F-HR",
+   "adsh": "0001697591-26-000003",
+   "file_date": "2026-05-15",
+   "n_positions": 5,
+   "total_value_usd": 1748117080,
+   "status": "OK"
+  },
+  {
+   "period": "2026-06-30",
+   "form": "13F-HR",
+   "adsh": "0001697591-26-000004",
+   "file_date": "2026-08-14",
+   "n_positions": 6,
+   "total_value_usd": 1883136156,
+   "status": "OK"
+  }
+ ],
+ "missing_periods": []
+}
