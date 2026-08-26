@@ -82,6 +82,21 @@ MANAGERS = {
     "perceptive": ("Perceptive Advisors (Joseph Edelman)",        "0001224962"),
     "soroban":    ("Soroban Capital (Eric Mandelblatt)",          "0001517857"),
     "whalerock":  ("Whale Rock Capital (Alex Sacerdote)",         "0001387322"),
+    # CIK conferido contra o campo name do submissions da SEC, nao resolvido
+    # por busca: nomes como "Redwood Capital Management" tem homonimos na EDGAR.
+    # Peconic ficou de fora daqui porque ja entrou pelo commit 38af058.
+    "thrive":     ("Thrive Capital (Josh Kushner)",               "0001845943"),
+    "cas":        ("CAS Investment Partners (Clifford Sosin)",    "0001697591"),
+    "redwood":    ("Redwood Capital Mgmt (Jonathan Kolatch)",     "0001316622"),
+    "slatepath":  ("Slate Path Capital (David Greenspan)",        "0001559706"),
+    "greenoaks":  ("Greenoaks Capital Partners",                  "0001840735"),
+    "tairen":     ("Tairen Capital (Terry Zhang)",                "0001652062"),
+    "ardsley":    ("Ardsley Advisory Partners (Phil Hempleman)",  "0000900529"),
+    "shannon":    ("Shannon River Fund Mgmt (Spencer Waxman)",    "0001301050"),
+    "octahedron": ("Octahedron Capital Management",               "0001891904"),
+    "scoggin":    ("Scoggin Management (Craig Effron)",           "0001086416"),
+    "lightstreet":("Light Street Capital (Glen Kacher)",          "0001569049"),
+    "ratan":      ("Ratan Capital Management (Nehal Chopra)",     "0001566887"),
     # Gestores gigantes (centenas de posições): rode localmente para coletar
     "coatue":     ("Coatue Management (Philippe Laffont)",        "0001135730"),
     "viking":     ("Viking Global (Andreas Halvorsen)",           "0001103804"),

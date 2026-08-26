@@ -1,3 +1,6 @@
 ﻿# artefato de build: regenerado em segundos por 'python 13f_search.py analyze'
 data/analysis.json
 
+
+# cache do Python, criado ao importar o script em verificacoes
+__pycache__/
