@@ -4,14 +4,6 @@
  "cik": "0001566887",
  "filings": [
   {
-   "period": "2024-06-30",
-   "form": "13F-HR",
-   "adsh": "0001566887-24-000007",
-   "file_date": "2024-08-14",
-   "n_positions": 39,
-   "status": "CACHED"
-  },
-  {
    "period": "2024-09-30",
    "form": "13F-HR",
    "adsh": "0001566887-24-000008",
@@ -76,5 +68,7 @@
    "status": "CACHED"
   }
  ],
- "missing_periods": []
+ "missing_periods": [
+  "2026-09-30"
+ ]
 }

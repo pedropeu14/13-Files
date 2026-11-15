@@ -4,14 +4,6 @@
  "cik": "0001376879",
  "filings": [
   {
-   "period": "2024-06-30",
-   "form": "13F-HR",
-   "adsh": "0001376879-24-000005",
-   "file_date": "2024-08-13",
-   "n_positions": 26,
-   "status": "CACHED"
-  },
-  {
    "period": "2024-09-30",
    "form": "13F-HR",
    "adsh": "0001376879-24-000006",
@@ -74,6 +66,15 @@
    "file_date": "2026-08-12",
    "n_positions": 22,
    "status": "CACHED"
+  },
+  {
+   "period": "2026-09-30",
+   "form": "13F-HR",
+   "adsh": "0000919574-26-007690",
+   "file_date": "2026-11-13",
+   "n_positions": 18,
+   "total_value_usd": 3154832,
+   "status": "OK"
   }
  ],
  "missing_periods": []
