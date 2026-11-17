@@ -73,8 +73,7 @@
    "adsh": "0002043585-26-000030",
    "file_date": "2026-11-16",
    "n_positions": 8,
-   "total_value_usd": 3781431260,
-   "status": "OK"
+   "status": "CACHED"
   }
  ],
  "missing_periods": []

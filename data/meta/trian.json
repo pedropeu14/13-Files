@@ -72,9 +72,8 @@
    "form": "13F-HR",
    "adsh": "0001345471-26-000051",
    "file_date": "2026-11-16",
-   "n_positions": 9,
-   "total_value_usd": 2595775908,
-   "status": "OK"
+   "n_positions": 10,
+   "status": "CACHED"
   }
  ],
  "missing_periods": []
