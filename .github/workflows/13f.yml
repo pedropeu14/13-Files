@@ -2,15 +2,25 @@ name: Atualizar 13F (carteiras + dashboard)
 
 on:
   schedule:
-    # Só duas rodadas por trimestre, nos meses de divulgação (fev/mai/ago/nov).
-    # Horários em UTC; a SEC recebe filings no horário de Nova York.
+    # Janela do prazo nos meses de divulgação (fev/mai/ago/nov), do dia 14 ao 20.
     #
-    # Dia 14, 21:00 UTC = 23h em Zurique = 17h em NY — depois do fechamento,
-    # quando a maioria dos grandes gestores já arquivou no dia do prazo.
-    - cron: "0 21 14 2,5,8,11 *"
-    # Dia 15, 13:00 UTC = 15h em Zurique = 9h em NY — pega quem arquivou tarde
-    # da noite do dia 14.
-    - cron: "0 13 15 2,5,8,11 *"
+    # Por que uma faixa e não dias fixos: o prazo do 13F é de 45 dias corridos
+    # após o fim do trimestre (14/fev, 15/mai, 14/ago, 14/nov), MAS rola para o
+    # próximo dia útil quando cai em fim de semana ou feriado. Em nov/2026 o dia
+    # 14 caiu num sábado e o prazo real foi segunda, 16 — as rodadas fixas de 14
+    # e 15 pegaram só 15 de 55 gestores. Os próximos quatro prazos também rolam:
+    #   4T26 -> ter 16/02/2027 (14 é domingo, 15 é Presidents' Day)
+    #   1T27 -> seg 17/05/2027 (15 é sábado)
+    #   2T27 -> seg 16/08/2027 (14 é sábado)
+    #   3T27 -> seg 15/11/2027 (14 é domingo)
+    #
+    # Rodar todo dia da faixa não gera ruído: o passo de commit só commita se
+    # algo mudou, então nos dias sem filing novo a rodada termina sem commit.
+    #
+    # 21:00 UTC = 17h em NY, depois do fechamento — pega quem arquivou no dia.
+    - cron: "0 21 14-20 2,5,8,11 *"
+    # 13:00 UTC = 9h em NY — pega quem arquivou de madrugada.
+    - cron: "0 13 14-20 2,5,8,11 *"
     #
     # Ambos ficam a 1h+ do radar.yml (11:00 e 22:00 UTC) para os dois não
     # tentarem dar push ao mesmo tempo.
